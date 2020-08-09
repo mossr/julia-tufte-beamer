@@ -1,0 +1,163 @@
+\usepackage{fontspec}
+\usepackage{sourcesanspro}
+\usepackage[T1]{fontenc}
+
+% TODO: albatian
+\usefonttheme{serif}
+\usefonttheme{professionalfonts}
+\usepackage{mathtools}
+\usepackage[tracking=true]{microtype}
+
+
+\usepackage{bold-extra}
+\usepackage{realscripts}
+\usepackage{amsmath,bm,amssymb}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage[group-digits=integer,group-minimum-digits=4,group-separator={,},detect-all]{siunitx}
+\usepackage[noend]{algpseudocode}
+\usepackage{textpos}
+
+\setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+\usepackage{newunicodechar}
+\newfontface{\calligraphic}{Latin Modern Math}[Scale=0.85]
+\newunicodechar{𝒪}{{\normalfont\calligraphic 𝒪}}
+\newunicodechar{ℬ}{{\normalfont\calligraphic ℬ}}
+\newunicodechar{𝒜}{{\normalfont\calligraphic 𝒜}}
+\newunicodechar{𝒟}{{\normalfont\calligraphic 𝒟}}
+\newunicodechar{𝒮}{{\normalfont\calligraphic 𝒮}}
+\newunicodechar{𝔼}{{\normalfont\calligraphic 𝔼}}
+\newunicodechar{⋮}{{\normalfont ⋮}}
+\newunicodechar{φ}{ϕ} % switched
+\newunicodechar{ϕ}{φ} % switched
+\newunicodechar{𝐰}{$\mathbf{w}$}
+\newunicodechar{𝐯}{$\mathbf{v}$}
+\newunicodechar{𝐕}{$\mathbf{V}$}
+\newunicodechar{𝐡}{$\mathbf{h}$}
+\newunicodechar{𝐠}{$\mathbf{g}$}
+\newunicodechar{𝚺}{{\normalfont\calligraphic 𝚺}}
+\newunicodechar{𝕀}{$\mathbb{I}$}
+\newunicodechar{ℯ}{{\normalfont\calligraphic ℯ}}
+
+\usepackage[style=verbose,backend=biber]{biblatex}
+\addbibresource{\jobname.bib}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamertemplate{bibliography item}{}% Remove reference icon.
+\renewcommand*{\bibfont}{\footnotesize}
+
+\usepackage{vector} % local
+\usepackage[pgfplots]{../juliaplots.sty/juliaplots}
+\setpythontexpygopt{style=algforopt}
+\pgfplotsset{compat=newest}
+\pgfplotsset{every axis legend/.append style={legend cell align=left, font=\footnotesize, draw=none, fill=none}}
+\pgfplotsset{every axis/.append style={axis background/.style={fill=white}}}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\pgfplotsset{every axis label/.append style={font=\footnotesize}}
+
+\fvset{baselinestretch=0.8}
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{patchplots}
+\usepgfplotslibrary{statistics}
+\usepgfplotslibrary{ternary}
+
+
+\usepackage{mdframed}
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}
+\newenvironment{algorithm}[1][htbp]
+{\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
+{\end{mdframed}}
+
+
+\input{title}
+\input{arrows_and_braces}
+
+
+\begin{jlcode}
+	include("../../jl/support_code.jl")
+
+	using Colors
+	using ColorSchemes
+	pasteljet = ColorMaps.RGBArrayMap(ColorSchemes.viridis, interpolation_levels=500, invert=true);
+    pastelRedBlue = ColorMaps.RGBArrayMap([RGB(246/255, 21/255, 92/255),
+										   RGB(1.0,1.0,1.0),
+										   RGB( 27/255,161/255,234/255)], interpolation_levels=500);
+\end{jlcode}
+
+
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{itemize subsubitem}{fg=black}
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}{{\textendash}}
+\setbeamertemplate{itemize subsubitem}[triangle]
+
+\setbeamerfont{frametitle}{series=\scshape} % \itshape
+\setbeamercolor{frametitle}{fg=black}
+
+\setbeamertemplate{frametitle}
+{
+    \vspace*{0.7cm}
+    \insertframetitle
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math
+\newcommand{\dset}{\mathcal{D}}
+\newcommand{\params}{\vect \theta}
+
+\newcommand{\true}{\text{true}}
+\newcommand{\false}{\text{false}}
+\newcommand{\transpose}{\top}
+
+\newcommand{\noisy}[1]{\tilde{#1}}
+
+\newcommand{\mat}[1]{\vect{#1}}
+\renewcommand{\vec}[1]{\vect{#1}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\paren}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\brock}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\curly}{\{}{\}}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\anglebrackets}{\langle}{\rangle}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\card}{|}{|}
+
+\newcommand{\minimize}{\operatornamewithlimits{minimize}}
+\newcommand{\maximize}{\operatornamewithlimits{maximize}}
+\newcommand{\supremum}{\operatornamewithlimits{supremum}}
+\newcommand{\argmin}{\operatornamewithlimits{arg\,min}}
+\newcommand{\argmax}{\operatornamewithlimits{arg\,max}}
+\newcommand{\subjectto}{\operatorname{subject~to}}
+\newcommand{\for}{\text{for} \;}
+\newcommand{\dimension}[1]{\text{dim}\paren*{#1}}
+\newcommand{\gaussian}[2]{\mathcal{N}(#1, #2)}
+\newcommand{\Gaussian}[2]{\mathcal{N}\paren*{#1, #2}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Real}{\text{Re}}
+\DeclareMathOperator{\Imag}{\text{Im}}
+\DeclareMathOperator{\nil}{\textsc{nil}}
+\DeclareMathOperator{\Expectation}{\mathbb{E}}
+\DeclareMathOperator{\Variance}{\mathrm{Var}}
+\DeclareMathOperator{\Normal}{\mathcal{N}}
+\DeclareMathOperator{\Uniform}{\mathcal{U}}
+\DeclareMathOperator{\Dirichlet}{Dir}
+\DeclareMathOperator{\atantwo}{atan2}
+\DeclareMathOperator{\modOne}{mod_1}
+\DeclareMathOperator{\trace}{Tr}
+\newcommand{\minprob}[3]{
+\begin{aligned}
+	\minimize_{#1} & & #2\\
+	\subjectto & & #3 \\
+\end{aligned}
+}

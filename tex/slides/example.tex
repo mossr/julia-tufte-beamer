@@ -1,0 +1,93 @@
+% Start a slide
+\begin{frame}[fragile]{Title of slide} % [fragile] needed when the content contains juliaverbatim.
+
+Example text within slide.\footcite{Kochenderfer2019}
+
+% Sample equation
+\begin{equation*}
+\underbrace{V(s)}_{\text{state value}} \!\!\! \leftarrow \;
+\max\limits_a \overbrace{\biggl(
+\underbrace{R(s,a)}_{\text{reward}} \; + \;
+\underbrace{\gamma V(s^\prime)}_{\mathclap{\substack{\text{discounted value} \\ \text{of next state}}}}
+\biggr)}^{\mathclap{\text{estimate of optimal discounted value}}}
+\end{equation*}
+
+% Julia code block
+\begin{algorithm}
+\begin{juliaverbatim}
+# Julia function
+V(s) = max(a->R(s,a) + γ*V(s′), A)
+\end{juliaverbatim}
+\end{algorithm}
+
+\end{frame}
+
+
+
+% Another slide (note, [fragile] is neede when using juliaconsole)
+\begin{frame}[fragile]{Julia console}
+
+Example Julia code executing at LaTeX compilation time. % \LaTeX{}
+
+\begin{juliaconsole}
+using LinearAlgebra
+A = Matrix{Int}(I, 3, 3)
+\end{juliaconsole}
+
+\end{frame}
+
+
+
+% Another slide (note, [fragile] is needed when using jlcode)
+\begin{frame}[fragile]{Plotting}
+
+Plot using \jlv{PGFPlots.jl}\footnote{\url{https://github.com/JuliaTeX/PGFPlots.jl}} directly in the TeX file.
+\begin{jlcode}
+	using Distributions
+
+	function format_sigma(s)
+		try
+			return Int(s)
+		catch e
+			return s
+		end
+	end
+
+	p = let
+		p = GroupPlot(3, 1, groupStyle="horizontal sep=1cm, y descriptions at=edge left")
+		for (i, (mu, sigma)) in enumerate([([0,0],[1 0; 0 1]),
+										   ([0,0],[1 0.75; 0.75 1]),
+										   ([0,0],[3 0; 0 3])])
+			push!(p, Axis(
+				Plots.Image((x,y)->pdf(MvNormal(mu,Float64.(sigma)), [x,y]), (-5,5), (-5,5),
+							zmin=0, zmax=0.05, xbins=151, ybins=151, colormap=pasteljet, colorbar=(i==4),
+							colorbarStyle="width=2mm"
+					), height="4.5cm", width="4.5cm",
+					title="{\\footnotesize\\shortstack{\$\\vec \\mu=[$(mu[1]),$(mu[2])]\$\\\\\$\\mat \\Sigma=\\begin{bmatrix}$(format_sigma(sigma[1,1])) & $(format_sigma(sigma[1,2]))\\\\$(format_sigma(sigma[2,1])) & $(format_sigma(sigma[2,2]))\\end{bmatrix}\$}}",
+					style="colorbar style={scaled y ticks=false,yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2, /tikz/.cd}}"))
+		end
+		p
+	end
+	plot(p)
+\end{jlcode}
+\begin{figure}
+	\begin{center}
+		\plot{fig/gaussian-bivariate-example-stack}
+	\end{center}
+\end{figure}
+
+\end{frame}
+
+
+
+% Another slide
+\begin{frame}{Example: bullet points}
+	\begin{itemize}
+		\item Bullet point
+		\begin{itemize}
+			\item Sub-bullet point
+		\end{itemize}
+		\item Bullet point
+		\item Bullet point
+	\end{itemize}
+\end{frame}

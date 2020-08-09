@@ -1,0 +1,18 @@
+% Small overbrace
+\makeatletter
+\def\smalloverbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3\p@}%
+  \tiny\downbracefill\crcr\noalign{\kern3\p@\nointerlineskip}%
+  $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+\makeatother
+
+% Small underbrace
+\makeatletter
+\def\smallunderbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#1}\hfil$\crcr
+   \noalign{\kern3\p@\nointerlineskip}%
+   \tiny\upbracefill\crcr\noalign{\kern3\p@}}}}\limits}
+\makeatother
+
+% Over and under arrows
+\newcommand{\overarrow}[2]{\overset{\mathclap{\substack{#2 \\ \downarrow}}}{#1}}
+\newcommand{\underarrow}[2]{\underset{\mathclap{\substack{\uparrow \\ #2}}}{#1}}
