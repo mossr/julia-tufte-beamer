@@ -43,37 +43,37 @@ A = Matrix{Int}(I, 3, 3)
 
 Plot using \jlv{PGFPlots.jl}\footnote{\url{https://github.com/JuliaTeX/PGFPlots.jl}} directly in the TeX file.
 \begin{jlcode}
-	using Distributions
+    using Distributions
 
-	function format_sigma(s)
-		try
-			return Int(s)
-		catch e
-			return s
-		end
-	end
+    function format_sigma(s)
+        try
+            return Int(s)
+        catch e
+            return s
+        end
+    end
 
-	p = let
-		p = GroupPlot(3, 1, groupStyle="horizontal sep=1cm, y descriptions at=edge left")
-		for (i, (mu, sigma)) in enumerate([([0,0],[1 0; 0 1]),
-										   ([0,0],[1 0.75; 0.75 1]),
-										   ([0,0],[3 0; 0 3])])
-			push!(p, Axis(
-				Plots.Image((x,y)->pdf(MvNormal(mu,Float64.(sigma)), [x,y]), (-5,5), (-5,5),
-							zmin=0, zmax=0.05, xbins=151, ybins=151, colormap=pasteljet, colorbar=(i==4),
-							colorbarStyle="width=2mm"
-					), height="4.5cm", width="4.5cm",
-					title="{\\footnotesize\\shortstack{\$\\vec \\mu=[$(mu[1]),$(mu[2])]\$\\\\\$\\mat \\Sigma=\\begin{bmatrix}$(format_sigma(sigma[1,1])) & $(format_sigma(sigma[1,2]))\\\\$(format_sigma(sigma[2,1])) & $(format_sigma(sigma[2,2]))\\end{bmatrix}\$}}",
-					style="colorbar style={scaled y ticks=false,yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2, /tikz/.cd}}"))
-		end
-		p
-	end
-	plot(p)
+    p = let
+        p = GroupPlot(3, 1, groupStyle="horizontal sep=1cm, y descriptions at=edge left")
+        for (i, (mu, sigma)) in enumerate([([0,0],[1 0; 0 1]),
+                                           ([0,0],[1 0.75; 0.75 1]),
+                                           ([0,0],[3 0; 0 3])])
+            push!(p, Axis(
+                Plots.Image((x,y)->pdf(MvNormal(mu,Float64.(sigma)), [x,y]), (-5,5), (-5,5),
+                            zmin=0, zmax=0.05, xbins=151, ybins=151, colormap=pasteljet, colorbar=(i==4),
+                            colorbarStyle="width=2mm"
+                    ), height="4.5cm", width="4.5cm",
+                    title="{\\footnotesize\\shortstack{\$\\vec \\mu=[$(mu[1]),$(mu[2])]\$\\\\\$\\mat \\Sigma=\\begin{bmatrix}$(format_sigma(sigma[1,1])) & $(format_sigma(sigma[1,2]))\\\\$(format_sigma(sigma[2,1])) & $(format_sigma(sigma[2,2]))\\end{bmatrix}\$}}",
+                    style="colorbar style={scaled y ticks=false,yticklabel style={/pgf/number format/.cd, fixed, fixed zerofill, precision=2, /tikz/.cd}}"))
+        end
+        p
+    end
+    plot(p)
 \end{jlcode}
 \begin{figure}
-	\begin{center}
-		\plot{fig/gaussian-bivariate-example-stack}
-	\end{center}
+    \begin{center}
+        \plot{fig/gaussian-bivariate-example-stack}
+    \end{center}
 \end{figure}
 
 \end{frame}
@@ -82,12 +82,12 @@ Plot using \jlv{PGFPlots.jl}\footnote{\url{https://github.com/JuliaTeX/PGFPlots.
 
 % Another slide
 \begin{frame}{Example: bullet points}
-	\begin{itemize}
-		\item Bullet point
-		\begin{itemize}
-			\item Sub-bullet point
-		\end{itemize}
-		\item Bullet point
-		\item Bullet point
-	\end{itemize}
+    \begin{itemize}
+        \item Bullet point
+        \begin{itemize}
+            \item Sub-bullet point
+        \end{itemize}
+        \item Bullet point
+        \item Bullet point
+    \end{itemize}
 \end{frame}

@@ -5,29 +5,29 @@
 % fullbook option
 \newif\if@fullbook\@fullbookfalse
 \DeclareOption{fullbook}{
-	\@fullbooktrue
+    \@fullbooktrue
 }
 % solutionappendix
 \newif\if@solutionappendix\@solutionappendixfalse
 \DeclareOption{solutionappendix}{
-	\@solutionappendixtrue
+    \@solutionappendixtrue
 }
 \ProcessOptions\relax
 
 \expandafter\def\csname PY@tok@err\endcsname{}
 
 \geometry{
-	paperheight=9in,
-	top=3pc,
-	bottom=6pc,
-	paperwidth=8in,
-	inner=3pc,
-	outer=3pc,
-	marginparsep=1pc,
-	marginparwidth=10pc,
-	includehead,
-	bindingoffset=2pc,
-	includemp
+    paperheight=9in,
+    top=3pc,
+    bottom=6pc,
+    paperwidth=8in,
+    inner=3pc,
+    outer=3pc,
+    marginparsep=1pc,
+    marginparwidth=10pc,
+    includehead,
+    bindingoffset=2pc,
+    includemp
 }
 
 \usepackage{titlecaps}
@@ -197,8 +197,8 @@
 \DeclareMathOperator{\trace}{Tr}
 \newcommand{\minprob}[3]{
 \begin{aligned}
-	\minimize_{#1} & & #2\\
-	\subjectto & & #3 \\
+    \minimize_{#1} & & #2\\
+    \subjectto & & #3 \\
 \end{aligned}
 }
 
@@ -225,30 +225,30 @@
 \definecolor{pastelRed}{HTML}{F5615C}
 
 \newcommand{\colorpt}[1]{%
-	\pgfplotscolormapaccess[0:100]{#1}{pasteljet}
+    \pgfplotscolormapaccess[0:100]{#1}{pasteljet}
     \def\TEMP{\definecolor{my color}{rgb}}
     \expandafter\TEMP\expandafter{\pgfmathresult}
 }
 
 \begin{jlcode}
-	using Colors
-	using ColorSchemes
-	pasteljet = ColorMaps.RGBArrayMap(ColorSchemes.viridis, interpolation_levels=500, invert=true);
-	pastelRedBlue = ColorMaps.RGBArrayMap([RGB(246/255, 21/255, 92/255),
-										   RGB(1.0,1.0,1.0),
-										   RGB( 27/255,161/255,234/255)], interpolation_levels=500);
+    using Colors
+    using ColorSchemes
+    pasteljet = ColorMaps.RGBArrayMap(ColorSchemes.viridis, interpolation_levels=500, invert=true);
+    pastelRedBlue = ColorMaps.RGBArrayMap([RGB(246/255, 21/255, 92/255),
+                                           RGB(1.0,1.0,1.0),
+                                           RGB( 27/255,161/255,234/255)], interpolation_levels=500);
 \end{jlcode}
 
 \input{colors.tex}
 
 \pgfplotscreateplotcyclelist{pastelcolors}{%
-	solid, pastelPurple, mark=none\\%
-	solid, pastelBlue, mark=none\\%
-	solid, pastelGreen, mark=none\\%
-	solid, pastelRed, mark=none\\%
-	solid, pastelMagenta, mark=none\\%
-	solid, pastelOrange, mark=none\\%
-	solid, pastelSeaGreen, mark=none\\%
+    solid, pastelPurple, mark=none\\%
+    solid, pastelBlue, mark=none\\%
+    solid, pastelGreen, mark=none\\%
+    solid, pastelRed, mark=none\\%
+    solid, pastelMagenta, mark=none\\%
+    solid, pastelOrange, mark=none\\%
+    solid, pastelSeaGreen, mark=none\\%
 }
 
 \tikzstyle{solid_line}=[solid, thick, mark=none]
@@ -280,27 +280,27 @@
 % from: https://github.com/gpoore/pythontex/issues/98#issuecomment-318078264
 \makeatletter
 \AtBeginEnvironment{juliaconsole}{%
-	\def\FV@@PreProcessLine{%
-		\expandafter\ifstrempty\expandafter{\FV@Line}{}{%
-			\FV@StepLineNo
-			\FV@Gobble
-			\expandafter\FV@ProcessLine\expandafter{\FV@Line}}}%
+    \def\FV@@PreProcessLine{%
+        \expandafter\ifstrempty\expandafter{\FV@Line}{}{%
+            \FV@StepLineNo
+            \FV@Gobble
+            \expandafter\FV@ProcessLine\expandafter{\FV@Line}}}%
 }
 \makeatother
 
 \makeatletter
 \RequirePackage{multicol}
 \renewenvironment{theindex}{%
-	\chapter*{\indexname}%
-	\begin{fullwidth}%
-		\small%
-		\parskip0pt%
-		\parindent0pt%
-		\let\item\@idxitem%
-		\begin{multicols}{3}%
-		}{%
-		\end{multicols}%
-	\end{fullwidth}%
+    \chapter*{\indexname}%
+    \begin{fullwidth}%
+        \small%
+        \parskip0pt%
+        \parindent0pt%
+        \let\item\@idxitem%
+        \begin{multicols}{3}%
+        }{%
+        \end{multicols}%
+    \end{fullwidth}%
 }
 % MOSS: problem set formatting
 \newtheoremstyle{psetstyle}% name
@@ -336,76 +336,76 @@
 \renewcommand\indexspace{\par\addvspace{1.0\baselineskip plus 0.5ex minus 0.2ex}\relax}%
 \renewcommand{\lettergroup}[1]{}% swallow the letter heading in the index
 \newcommand{\forceheader}[1]{
-	\fancyhf{}%
-	\fancyhead[LE]{\thepage\quad\smallcaps{#1}}
-	\fancyhead[RO]{\smallcaps{#1}\quad\thepage}
-	\fancyfoot[LE]{\bookfoot}
-	\fancyfoot[RO]{\bookfoot}
+    \fancyhf{}%
+    \fancyhead[LE]{\thepage\quad\smallcaps{#1}}
+    \fancyhead[RO]{\smallcaps{#1}\quad\thepage}
+    \fancyfoot[LE]{\bookfoot}
+    \fancyfoot[RO]{\bookfoot}
 }
 \newcommand{\psetheader}[3]{
-	\fancyhf{}%
-	\fancypagestyle{plain}{} % forces first page to have headers/footers
-	\fancyhead[L]{Q\arabic{psetquestion}\quad\smallcaps{CS 109: #1}} % \thepage (Problem Set \arabic{chapter})
-	\fancyhead[R]{\smallcaps{\psetdate\today}\quad}%\thepage
-	\fancyfoot[L]{\smallcaps{#2}}
-	\fancyfoot[R]{\smallcaps{#3}}
+    \fancyhf{}%
+    \fancypagestyle{plain}{} % forces first page to have headers/footers
+    \fancyhead[L]{Q\arabic{psetquestion}\quad\smallcaps{CS 109: #1}} % \thepage (Problem Set \arabic{chapter})
+    \fancyhead[R]{\smallcaps{\psetdate\today}\quad}%\thepage
+    \fancyfoot[L]{\smallcaps{#2}}
+    \fancyfoot[R]{\smallcaps{#3}}
 }
 \newcommand{\quizheader}[3]{
-	\fancyhf{}%
-	\fancypagestyle{plain}{} % forces first page to have headers/footers
-	\fancyhead[L]{Q\arabic{quizquestion}\quad\smallcaps{CS 109: #1}} % \thepage (Problem Set \arabic{chapter})
-	\fancyhead[R]{\smallcaps{\psetdate\today}\quad}%\thepage
-	\fancyfoot[L]{\smallcaps{#2}}
-	\fancyfoot[R]{\smallcaps{#3}}
+    \fancyhf{}%
+    \fancypagestyle{plain}{} % forces first page to have headers/footers
+    \fancyhead[L]{Q\arabic{quizquestion}\quad\smallcaps{CS 109: #1}} % \thepage (Problem Set \arabic{chapter})
+    \fancyhead[R]{\smallcaps{\psetdate\today}\quad}%\thepage
+    \fancyfoot[L]{\smallcaps{#2}}
+    \fancyfoot[R]{\smallcaps{#3}}
 }
 \newcommand{\navheader}[1]{
-	\fancyhf{}%
-	\fancypagestyle{plain}{} % forces first page to have headers/footers
-	\fancyhead[LE]{\thepage\quad\smallcaps{#1}}
-	\fancyhead[RO]{\smallcaps{#1}\quad\thepage}
-	\fancyfoot[LE]{\bookfoot}
-	% \fancyfoot[LO]{\smallcaps{\hyperref[cha:navigation]{Nav}}}
-	% \fancyfoot[RE]{\smallcaps{\hyperref[cha:navigation]{Nav}}}
-	\fancyfoot[RO]{\bookfoot}
+    \fancyhf{}%
+    \fancypagestyle{plain}{} % forces first page to have headers/footers
+    \fancyhead[LE]{\thepage\quad\smallcaps{#1}}
+    \fancyhead[RO]{\smallcaps{#1}\quad\thepage}
+    \fancyfoot[LE]{\bookfoot}
+    % \fancyfoot[LO]{\smallcaps{\hyperref[cha:navigation]{Nav}}}
+    % \fancyfoot[RE]{\smallcaps{\hyperref[cha:navigation]{Nav}}}
+    \fancyfoot[RO]{\bookfoot}
 }
 \renewcommand\frontmatter{%
-	\cleardoublepage%
-	\@mainmatterfalse%
-	\fancyhf{}%
-%	\renewcommand{\chaptermark}[1]{\markboth{##1}{}}
-%	\renewcommand{\sectionmark}[1]{\markright{##1}}
-%	\fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
-%	\fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
-	\fancyfoot[LE]{\bookfoot}
-	\fancyfoot[RO]{\bookfoot}
-	\pagenumbering{roman}
+    \cleardoublepage%
+    \@mainmatterfalse%
+    \fancyhf{}%
+%   \renewcommand{\chaptermark}[1]{\markboth{##1}{}}
+%   \renewcommand{\sectionmark}[1]{\markright{##1}}
+%   \fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
+%   \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
+    \fancyfoot[LE]{\bookfoot}
+    \fancyfoot[RO]{\bookfoot}
+    \pagenumbering{roman}
 }
 \renewcommand\mainmatter{%
-	\cleardoublepage%
-	\@mainmattertrue%
-	\fancyhf{}%
-	\renewcommand{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter.\ ##1}{}}
-	\renewcommand{\sectionmark}[1]{\markright{\thesection.\ ##1}}
-	\fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
-	\fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
-	\fancyfoot[LO]{\hyperref[cha:toc]{{\footnotesize\smallcaps{TOC}}}}
-	\fancyfoot[RE]{\hyperref[cha:toc]{{\footnotesize\smallcaps{TOC}}}}
-	\fancyfoot[LE]{\bookfoot}
-	\fancyfoot[RO]{\bookfoot}
-	\pagenumbering{arabic}
+    \cleardoublepage%
+    \@mainmattertrue%
+    \fancyhf{}%
+    \renewcommand{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter.\ ##1}{}}
+    \renewcommand{\sectionmark}[1]{\markright{\thesection.\ ##1}}
+    \fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
+    \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
+    \fancyfoot[LO]{\hyperref[cha:toc]{{\footnotesize\smallcaps{TOC}}}}
+    \fancyfoot[RE]{\hyperref[cha:toc]{{\footnotesize\smallcaps{TOC}}}}
+    \fancyfoot[LE]{\bookfoot}
+    \fancyfoot[RO]{\bookfoot}
+    \pagenumbering{arabic}
 }
 \renewcommand\backmatter{%
-	\cleardoublepage%
-	\@mainmatterfalse%
-	\fancyhf{}%
-%	\renewcommand{\chaptermark}[1]{\markboth{##1}{##1}}
-%	\renewcommand{\sectionmark}[1]{}
-%	\renewcommand{\chaptermark*}[1]{\markboth{##1}{}}
-%	\renewcommand{\sectionmark*}[1]{\markright{##1}}
-%	\fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
-%	\fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
-	\fancyfoot[LE]{\bookfoot}
-	\fancyfoot[RO]{\bookfoot}
+    \cleardoublepage%
+    \@mainmatterfalse%
+    \fancyhf{}%
+%   \renewcommand{\chaptermark}[1]{\markboth{##1}{##1}}
+%   \renewcommand{\sectionmark}[1]{}
+%   \renewcommand{\chaptermark*}[1]{\markboth{##1}{}}
+%   \renewcommand{\sectionmark*}[1]{\markright{##1}}
+%   \fancyhead[LE]{\thepage\quad\smallcaps{\leftmark}}
+%   \fancyhead[RO]{\smallcaps{\rightmark}\quad\thepage}
+    \fancyfoot[LE]{\bookfoot}
+    \fancyfoot[RO]{\bookfoot}
 }
 \makeatother
 
@@ -417,12 +417,12 @@
 \newcommand\listexamplename{List of Examples}
 \makeatletter
 \newcommand\listofexamples{%
-	\ifthenelse{\equal{\@tufte@class}{book}}%
-	{\chapter*{\listexamplename}}%
-	{\section*{\listexamplename}}%
-	%  \begin{fullwidth}%
-	\@starttoc{loe}%
-	%  \end{fullwidth}%
+    \ifthenelse{\equal{\@tufte@class}{book}}%
+    {\chapter*{\listexamplename}}%
+    {\section*{\listexamplename}}%
+    %  \begin{fullwidth}%
+    \@starttoc{loe}%
+    %  \end{fullwidth}%
 }
 \renewcommand\theexample
 {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@example}
@@ -432,20 +432,20 @@
 \def\fnum@example{\examplename\nobreakspace\theexample}
 \newenvironment{example}[1][htbp]
 {\begin{@tufte@float}[#1]{example}{}
-		\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]\setlength{\parindent}{1.0pc}\ignorespaces}
-		{\end{mdframed}\end{@tufte@float}}
+        \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]\setlength{\parindent}{1.0pc}\ignorespaces}
+        {\end{mdframed}\end{@tufte@float}}
 \makeatother
 \newcounter{algorithm}[chapter]
 \newcommand\algorithmname{Algorithm}
 \newcommand\listalgorithmname{List of Algorithms}
 \makeatletter
 \newcommand\listofalgorithms{%
-	\ifthenelse{\equal{\@tufte@class}{book}}%
-	{\chapter*{\listalgorithmname}}%
-	{\section*{\listalgorithmname}}%
-	%  \begin{fullwidth}%
-	\@starttoc{loa}%
-	%  \end{fullwidth}%
+    \ifthenelse{\equal{\@tufte@class}{book}}%
+    {\chapter*{\listalgorithmname}}%
+    {\section*{\listalgorithmname}}%
+    %  \begin{fullwidth}%
+    \@starttoc{loa}%
+    %  \end{fullwidth}%
 }
 \renewcommand\thealgorithm
 {\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@algorithm}
@@ -455,33 +455,33 @@
 \def\fnum@algorithm{\algorithmname\nobreakspace\thealgorithm}
 \newenvironment{algorithm}[1][htbp]
 {\begin{@tufte@float}[#1]{algorithm}{}
-		\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
-		{\end{mdframed}\end{@tufte@float}}
+        \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
+        {\end{mdframed}\end{@tufte@float}}
 \makeatother
 
 \makeatletter
 \titleformat{\chapter}%
 [hang]% shape
 {}% format applied to label+text
-	{\itshape\huge\thechapter}% label
-	{1em}% horizontal separation between label and title body
-	{\huge\rmfamily\itshape}% before the title body
+    {\itshape\huge\thechapter}% label
+    {1em}% horizontal separation between label and title body
+    {\huge\rmfamily\itshape}% before the title body
 
 \ifthenelse{\boolean{@tufte@toc}}{%
-	\titlecontents{chapter}%
-	[0em] % distance from left margin
-	{\vspace{\baselineskip}\begin{fullwidth}\Large\rmfamily\itshape} % above (global formatting of entry)
-		{\hspace*{0em}\contentslabel{0em}\hspace*{0.5in}} % before w/label (label = ``2'')
-		{\hspace*{0em}} % before w/o label
-		{\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
-		[\end{fullwidth}] % after
-	\titlecontents{section}% FIXME
-	[0em] % distance from left margin
-	{\vspace{0\baselineskip}\begin{fullwidth}\large\rmfamily\itshape} % above (global formatting of entry)
-		{\hspace*{0.5in}\contentslabel{0.5in}} % before w/label (label = ``2.6'')
-		{\hspace*{0.5in}} % before w/o label
-		{\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
-		[\end{fullwidth}] % after
+    \titlecontents{chapter}%
+    [0em] % distance from left margin
+    {\vspace{\baselineskip}\begin{fullwidth}\Large\rmfamily\itshape} % above (global formatting of entry)
+        {\hspace*{0em}\contentslabel{0em}\hspace*{0.5in}} % before w/label (label = ``2'')
+        {\hspace*{0em}} % before w/o label
+        {\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
+        [\end{fullwidth}] % after
+    \titlecontents{section}% FIXME
+    [0em] % distance from left margin
+    {\vspace{0\baselineskip}\begin{fullwidth}\large\rmfamily\itshape} % above (global formatting of entry)
+        {\hspace*{0.5in}\contentslabel{0.5in}} % before w/label (label = ``2.6'')
+        {\hspace*{0.5in}} % before w/o label
+        {\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
+        [\end{fullwidth}] % after
 }{}
 
 \titleclass{\part}{top}
@@ -493,13 +493,13 @@
 {\huge\rmfamily\itshape}% before the title body
 
 \ifthenelse{\boolean{@tufte@toc}}{%
-	\titlecontents{part}%
-	[0em] % distance from left margin
-	{\vspace{\baselineskip}\begin{fullwidth}\LARGE\rmfamily\itshape} % above (global formatting of entry)
-		{\hspace*{0em}\contentslabel{0em}\hspace*{0.5in}} % before w/label (label = ``2'')
-		{\hspace*{0em}\contentslabel{0em}Part~} % before w/o label
-		{\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
-		[\end{fullwidth}] % after
+    \titlecontents{part}%
+    [0em] % distance from left margin
+    {\vspace{\baselineskip}\begin{fullwidth}\LARGE\rmfamily\itshape} % above (global formatting of entry)
+        {\hspace*{0em}\contentslabel{0em}\hspace*{0.5in}} % before w/label (label = ``2'')
+        {\hspace*{0em}\contentslabel{0em}Part~} % before w/o label
+        {\rmfamily\upshape\qquad\thecontentspage} % filler + page (leaders and page num)
+        [\end{fullwidth}] % after
 }{}
 
 \makeatother
@@ -533,44 +533,44 @@
 % Change Figure X: to Figure X.
 \makeatletter
 \long\def\@caption#1[#2]#3{%
-	\par%
-	\addcontentsline{\csname ext@#1\endcsname}{#1}%
-	{\protect\numberline{\csname the#1\endcsname}{\ignorespaces #2}}%
-	\begingroup%
-	\@parboxrestore%
-	\if@minipage%
-	\@setminipage%
-	\fi%
-	\@tufte@caption@font\@tufte@caption@justification%
-	\noindent\csname fnum@#1\endcsname. \ignorespaces#3\par%
-	%\@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
-	\endgroup}
+    \par%
+    \addcontentsline{\csname ext@#1\endcsname}{#1}%
+    {\protect\numberline{\csname the#1\endcsname}{\ignorespaces #2}}%
+    \begingroup%
+    \@parboxrestore%
+    \if@minipage%
+    \@setminipage%
+    \fi%
+    \@tufte@caption@font\@tufte@caption@justification%
+    \noindent\csname fnum@#1\endcsname. \ignorespaces#3\par%
+    %\@makecaption{\csname fnum@#1\endcsname}{\ignorespaces #3}\par
+    \endgroup}
 \makeatother
 
 % from: https://tex.stackexchange.com/questions/453132/fresh-install-of-tl2018-no-tikz-graph-drawing-libraries-found
 \usepackage{luacode}
 \begin{luacode*}
-	function pgf_lookup_and_require(name)
-	local sep = package.config:sub(1,1)
-	local function lookup(name)
-	local sub = name:gsub('%.',sep)
-	if kpse.find_file(sub, 'lua') then
-	require(name)
-	elseif kpse.find_file(sub, 'clua') then
-	collectgarbage('stop')
-	require(name)
-	collectgarbage('restart')
-	else
-	return false
-	end
-	return true
-	end
-	return
-	lookup('pgf.gd.' .. name .. '.library') or
-	lookup('pgf.gd.' .. name) or
-	lookup(name .. '.library') or
-	lookup(name)
-	end
+    function pgf_lookup_and_require(name)
+    local sep = package.config:sub(1,1)
+    local function lookup(name)
+    local sub = name:gsub('%.',sep)
+    if kpse.find_file(sub, 'lua') then
+    require(name)
+    elseif kpse.find_file(sub, 'clua') then
+    collectgarbage('stop')
+    require(name)
+    collectgarbage('restart')
+    else
+    return false
+    end
+    return true
+    end
+    return
+    lookup('pgf.gd.' .. name .. '.library') or
+    lookup('pgf.gd.' .. name) or
+    lookup(name .. '.library') or
+    lookup(name)
+    end
 \end{luacode*}
 \usegdlibrary{layered}
 \usegdlibrary{trees}

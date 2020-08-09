@@ -62,10 +62,10 @@ Running `make test` pulls all the code and then runs all tests in `juliatest` bl
 * `make compile` compiles the whole presentation (`make main` works too)
 * `make sandbox` will compile `tex/sandbox.tex` (meant for development, e.g., single slides)
 * `make quick` will only run `lualatex` (skipping `pythontex` and `biber` for quick LaTeX compilation)
-	* `make quick-sandbox` does quick compilation for `tex/sandbox.tex`
+    * `make quick-sandbox` does quick compilation for `tex/sandbox.tex`
 * `make clean` removes all generated files except `main.pdf` and `sandbox.pdf`
 * `make full` runs `clean` and `compile`
-	* `make full-sandbox` does full clean/compilation for `tex/sandbox.tex`
+    * `make full-sandbox` does full clean/compilation for `tex/sandbox.tex`
 * `make save` copies the `main.pdf` file to `presentation.pdf` (which you can modify in the makefile)
 
 

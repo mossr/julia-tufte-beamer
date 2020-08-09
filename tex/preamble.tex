@@ -76,14 +76,14 @@
 
 
 \begin{jlcode}
-	include("../../jl/support_code.jl")
+    include("../../jl/support_code.jl")
 
-	using Colors
-	using ColorSchemes
-	pasteljet = ColorMaps.RGBArrayMap(ColorSchemes.viridis, interpolation_levels=500, invert=true);
+    using Colors
+    using ColorSchemes
+    pasteljet = ColorMaps.RGBArrayMap(ColorSchemes.viridis, interpolation_levels=500, invert=true);
     pastelRedBlue = ColorMaps.RGBArrayMap([RGB(246/255, 21/255, 92/255),
-										   RGB(1.0,1.0,1.0),
-										   RGB( 27/255,161/255,234/255)], interpolation_levels=500);
+                                           RGB(1.0,1.0,1.0),
+                                           RGB( 27/255,161/255,234/255)], interpolation_levels=500);
 \end{jlcode}
 
 
@@ -157,7 +157,7 @@
 \DeclareMathOperator{\trace}{Tr}
 \newcommand{\minprob}[3]{
 \begin{aligned}
-	\minimize_{#1} & & #2\\
-	\subjectto & & #3 \\
+    \minimize_{#1} & & #2\\
+    \subjectto & & #3 \\
 \end{aligned}
 }
