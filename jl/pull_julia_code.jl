@@ -4,6 +4,9 @@ function get_files(; slides_regex::Regex = r"include\{slides")
         if occursin(slides_regex, line) && lstrip(line)[1] != '%'
             m = match(r"slides/\S*(?=\})", line)
             @assert isa(m, RegexMatch)
+            if !isdir(joinpath("output", dirname(m.match)))
+                mkdir(joinpath("output", dirname(m.match)))
+            end
             push!(retval, joinpath("tex", m.match*".tex"))
         end
     end
@@ -25,12 +28,12 @@ end
 
 if !isdir("output")
     mkdir("output")
-    if !isdir(joinpath("output", "fig"))
-        mkdir(joinpath("output", "fig"))
-    end
-    if !isdir(joinpath("output", "slides"))
-        mkdir(joinpath("output", "slides"))
-    end
+end
+if !isdir(joinpath("output", "fig"))
+    mkdir(joinpath("output", "fig"))
+end
+if !isdir(joinpath("output", "slides"))
+    mkdir(joinpath("output", "slides"))
 end
 
 # Export all juliaconsole blocks
