@@ -1,10 +1,10 @@
-# Tufte-style Beamer Template with Julia Integration
-A beamer template using Tufte-LaTeX style with Julia code integration similar to [Tufte Algorithms Book Template](https://github.com/sisl/tufte_algorithms_book). The template allows for the direct compilation of a presentation-ready PDF, including support for figures, Julia algorithm blocks, and Julia console blocks.
-
-
-Forked from [simple-tufte-beamer](https://github.com/ViniciusBRodrigues/simple-tufte-beamer) and framework modified from [tufte_algorithms_book](https://github.com/sisl/tufte_algorithms_book).
+# Section Slides: AA228/CS238 Decision Making Under Uncertainty
+Refer to main branch for template: https://github.com/mossr/julia-tufte-beamer
 
 See example slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blob/master/main.pdf)
+
+## Beliefs: State Uncertainty
+Working AA228/CS238 section slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blob/aa228/beliefs/main.pdf)
 
 
 # Installation
