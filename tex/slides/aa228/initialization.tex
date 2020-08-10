@@ -1,0 +1,76 @@
+\begin{frame}[fragile]{Belief Initialization}
+
+Before any actions or observations, we start with an initial belief distribution
+\begin{itemize}
+    \item We can encode prior knowledge in the initial distribution
+    \item Generally want to use diffuse (i.e. spread out) initial distributions to avoid over confidence in the absence of information
+    \begin{itemize}
+        \item In non-parametric representations, a diffuse initial prior may cause difficulties
+        \item Thus, we may wait until an informative observation is make to initialize our beliefs
+    \end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Example: Landmark Belief Initialization}
+
+\begin{figure}
+    \caption{Localization of an autonomous car using a landmark (Example 19.1).}
+    \begin{center}
+        \begin{jlcode}
+            p = let
+                Random.seed!(0)
+
+                tikz_string = ""
+                tikz_string *= "\\coordinate (ego) at (1,-0.3);\n"
+                tikz_string *= "\\draw [rounded corners=1] (\$(ego) - (0.5,0.25)\$) rectangle ++(1,0.5);\n"
+                tikz_string *= "\\coordinate (sensor) at (\$(ego) + (0.25,0)\$);\n"
+                tikz_string *= "\\def\\ang{12}\n"
+                tikz_string *= "\\def\\r{5}\n"
+                tikz_string *= "\\coordinate (landmark) at (\$(sensor) + (\\ang:\\r)\$);\n"
+                tikz_string *= "\\draw (landmark) circle (0.5);\n"
+                tikz_string *= "\\node[anchor=south, font=\\footnotesize] at (\$(landmark) + (0,0.5)\$) {landmark};\n"
+                tikz_string *= "\\draw[thick, pastelBlue] (sensor) -- (landmark);\n"
+                tikz_string *= "\\fill[pastelBlue] (landmark) circle (0.1);\n\n"
+
+                tikz_string *= "\\node[anchor=south, font=\\tiny] at (\$(sensor)!0.5!(landmark)\$) {\$r\$};"
+                tikz_string *= "\\def\\rarc{3}"
+                tikz_string *= "\\draw[-{stealth[length=1mm,width=0.5mm]}] (\$(sensor) + (0:\\rarc)\$) arc (0:\\ang:\\rarc);"
+                tikz_string *= "\\node[anchor=west, font=\\tiny] at (\$(sensor) + (\\ang/2:\\rarc)\$) {\$\\theta\$};"
+
+                r = 5
+                θ = deg2rad(12)
+                νr = 0.5
+                νθ = 0.1
+                Gr = Normal(r, νr)
+                Gθ = Normal(θ, νθ)
+                Uϕ = Uniform(0.0, 2π)
+
+                landmark_x = 0.5 + r*cos(θ)
+                landmark_y = -0.55 + r*sin(θ)
+
+                for i in 1:100
+                    r_hat = rand(Gr)
+                    θ_hat = rand(Gθ)
+                    ϕ_hat = rand(Uϕ)
+                    car_x = landmark_x - r_hat * cos(θ_hat)
+                    car_y = landmark_y - r_hat * sin(θ_hat)
+
+                    tikz_string *= "\\draw [opacity=0.2, rotate around={$(rad2deg(ϕ_hat)):(landmark)}, rounded corners=1] ($(car_x),$(car_y)) rectangle ++(1,0.5);\n"
+                end
+
+                TikzPicture(tikz_string, preamble="", options="x=0.4cm, y=0.4cm")
+            end
+            plot(p)
+        \end{jlcode}
+        \plot{fig/sample_from_induced_landmark_obs}
+    \end{center}
+\end{figure}
+
+{\small Making a range $r$ and bearing $\theta$ observation, we initialize our belief around the landmark.}
+
+\end{frame}

@@ -1,0 +1,28 @@
+\begin{frame}[fragile]{Belief Vector}
+
+\begin{itemize}
+    \item In the finite state case, we can represent beliefs using a categorical distribution\footnote{A probability mass is assigned to each discrete state.}
+    \begin{itemize}
+        \item Represented as a \textit{belief vector} $\vec{b}$ of length $\card{\mathcal{S}}$, therefore $\mathcal{B} \subset \R^{\card{\mathcal{S}}}$
+        \item Sometimes $\mathcal{B}$ is referred to as a \textit{probability simplex} or \textit{belief simplex}\footnote{Simplex being the generalization of a triangle to arbitrary dimensions.}
+    \end{itemize}
+\end{itemize}
+
+% \vspace{5mm}
+
+\begin{itemize}
+    \item The belief vector $\vec{b}$ must be strictly non-negative and sum to one:
+    \begin{equation*}
+        b(s) \ge 0 \text{ for all } s \in \mathcal{S} \qquad \sum_s b(s) = 1
+    \end{equation*}
+    \item In vector notation:
+    \begin{equation*}
+        \vec{b} \ge \vec{0} \qquad \vec{1}^\top \vec{b} = 1
+    \end{equation*}
+    \item In Julia syntax:
+\begin{center}
+\jlv{all(𝐛 .≥ 0) && sum(𝐛) ≈ 1}
+\end{center}
+\end{itemize}
+
+\end{frame}

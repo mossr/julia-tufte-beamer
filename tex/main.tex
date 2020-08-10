@@ -5,32 +5,55 @@
 
 \input{preamble}
 
-\title{Title of Presentation}
-\subtitle{This is a more detailed subtitle}
+\title{Beliefs: State Uncertainty}
+\subtitle{AA228/CS238 Decision Making Under Uncertainty\footcite{Kochenderfer2020}}
 \author{Robert Moss}
 \institute{Stanford University}
 \email{mossr@cs.stanford.edu}
-\date{}
+\date{October 28, 2020}
 
 
 \begin{document}
 
 \begin{frame}
+    \setbeamerfont{footnote}{size=\fontsize{5}{5.5}} % temporary
     \maketitle
+    \setbeamerfont{footnote}{size=\tiny} % restore
 \end{frame}
 
-% Include individual or combined slides.
-\include{slides/example}
-\include{slides/example-julia-console}
-\include{slides/example-plotting}
-\include{slides/example-tikz}
-\include{slides/example-algorithm}
-\include{slides/example-definition}
-\include{slides/example-table}
-\include{slides/example-bullets}
+% Chapter 19: Beliefs
+\include{slides/aa228/introduction}
+\include{slides/aa228/representation}
+\include{slides/aa228/algorithms}
+\include{slides/aa228/initialization}
+\include{slides/aa228/observation-space}
+\include{slides/aa228/belief-inference}
+\include{slides/aa228/belief-vector}
+\include{slides/aa228/discrete-state-filter}
+% \include{slides/aa228/crying-baby-problem}
+% \include{slides/aa228/linear-gaussian} % Kalman filter
+% \include{slides/aa228/extended-kalman-filter}
+% \include{slides/aa228/unscented-kalman-filter}
+% \include{slides/aa228/particle-filter}
+% \include{slides/aa228/particle-injection}
+% \include{slides/aa228/adaptive-particle-injection}
+% \include{slides/aa228/belief-summary}
+
+\section{Exact Belief State Planning}
+% Chapter 20: Exact Belief State Planning
+% \include{slides/aa228/introduction-planning}
+% \include{slides/aa228/belief-state-mdp}
+% \include{slides/aa228/conditional-plans}
+% \include{slides/aa228/alpha-vectors}
+% \include{slides/aa228/pomdp-value-iteration}
+% \include{slides/aa228/linear-policies}
+% \include{slides/aa228/planning-summary}
+
+
 
 
 \begin{frame}{References}
+    \renewcommand*{\bibfont}{\scriptsize}
     \printbibliography
 \end{frame}
 

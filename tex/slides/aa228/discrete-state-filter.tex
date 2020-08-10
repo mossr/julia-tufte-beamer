@@ -1,0 +1,20 @@
+\begin{frame}[fragile]{Discrete State Filter}
+
+% \begin{definitionblock}{Filter}
+% A process that remove noise from data.\footnote{Often used in signal processing, effectively ``filtering'' out the noise.}
+% \end{definitionblock}
+A \textit{filter} is a process that remove noise from data.\footnote{Often used in signal processing, effectively ``filtering'' out the noise.}
+
+\vspace{5mm}
+
+Due to the independece assumptions, if an agent with belief $b$ takes an action $a$ and receives an observation $o$, then the new belief $b^\prime$ becomes:
+\begin{align*}
+    b^\prime(s^\prime) &= P(s^\prime \mid b, a, o)\\
+                       &\propto P(o \mid b, a, s^\prime) P(s^\prime \mid b, a) \tag{Bayes' rule}\\
+                       &\propto O(o \mid a, s^\prime) P(s^\prime \mid b, a)\tag{observation definition}\\
+                       &\propto O(o \mid a, s^\prime) \sum_s P(s^\prime \mid b, a, s) P(s \mid b, a) \tag{law of total probability}\\
+                       &\propto O(o \mid a, s^\prime)\sum_s T(s^\prime \mid s, a)b(s) \tag{state transition model}
+\end{align*}
+
+
+\end{frame}

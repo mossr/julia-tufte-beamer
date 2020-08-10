@@ -1,4 +1,7 @@
 # Any imports you need go here.
+using Random
+using TikzPictures
+using Distributions
 using PGFPlots
 using LinearAlgebra # for dot: ⋅
 
