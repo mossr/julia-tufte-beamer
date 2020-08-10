@@ -23,9 +23,13 @@
 \usepackage{multirow}
 \usepackage{longtable,tabularx,booktabs}
 \usepackage[flushleft]{threeparttable}
+\usepackage{vector} % local
+\usepackage{varwidth}
 
-\newcommand{\smallcaps}[1]{\textsc{#1}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Unicode settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 \usepackage{newunicodechar}
 \newfontface{\calligraphic}{Latin Modern Math}[Scale=0.85]
@@ -43,17 +47,25 @@
 \newunicodechar{𝐕}{$\mathbf{V}$}
 \newunicodechar{𝐡}{$\mathbf{h}$}
 \newunicodechar{𝐠}{$\mathbf{g}$}
+\newunicodechar{𝐛}{$\mathbf{b}$}
 \newunicodechar{𝚺}{{\normalfont\calligraphic 𝚺}}
 \newunicodechar{𝕀}{$\mathbb{I}$}
 \newunicodechar{ℯ}{{\normalfont\calligraphic ℯ}}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reference (biber) settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[style=verbose,backend=biber]{biblatex}
 \addbibresource{\jobname.bib}
 \setbeamerfont{footnote}{size=\tiny}
 \setbeamertemplate{bibliography item}{}% Remove reference icon.
 \renewcommand*{\bibfont}{\footnotesize}
 
-\usepackage{vector} % local
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PGFPlot settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[pgfplots]{../juliaplots.sty/juliaplots}
 \setpythontexpygopt{style=algforopt}
 \pgfplotsset{compat=newest}
@@ -70,19 +82,29 @@
 \usepgfplotslibrary{ternary}
 
 
-\usepackage{mdframed}
-\definecolor{shadecolor}{rgb}{1,0.8,0.3}
-\newenvironment{algorithmblock}[1][htbp]
-{\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
-{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{cardinal}{RGB}{140,21,21} % https://web.stanford.edu/group/webdev/identity/public/color.html
+\definecolor{coolgrey}{RGB}{77,79,83} % https://web.stanford.edu/group/webdev/identity/public/color.html
 
-\newenvironment{definitionblock}[1]{%
-    \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]
-        \textbf{Definition: #1.}\;
-}{%
-    \end{mdframed}
-}
+\definecolor{stanfordred}{RGB}{140,21,21}
+\definecolor{darkgreen}{RGB}{21,140,21}
+\definecolor{darkblue}{RGB}{21,21,140}
+\definecolor{sun}{RGB}{234,171,0}
+\colorlet{shadecolor}{black!5}
 
+\newcommand{\darkblue}[1]{{\color{darkblue} #1}}
+\newcommand{\darkgreen}[1]{{\color{darkgreen} #1}}
+\newcommand{\darkred}[1]{{\color{stanfordred} #1}}
+
+\definecolor{pastelMagenta}{HTML}{FF48CF}
+\definecolor{pastelPurple}{HTML}{8770FE}
+\definecolor{pastelBlue}{HTML}{1BA1EA}
+\definecolor{pastelSeaGreen}{HTML}{14B57F}
+\definecolor{pastelGreen}{HTML}{3EAA0D}
+\definecolor{pastelOrange}{HTML}{C38D09}
+\definecolor{pastelRed}{HTML}{F5615C}
 
 \begin{jlcode}
     include("../../jl/support_code.jl")
@@ -96,9 +118,75 @@
 \end{jlcode}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TikZ settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{patterns}
+\usetikzlibrary{graphs}
+\usetikzlibrary{graphdrawing}
+\usetikzlibrary{shapes}
+
+\tikzset{
+    func/.style = {rectangle, rounded corners=1, draw},
+    partial/.style = {rectangle, darkgreen, font=\bfseries},
+    input/.style = {rectangle},
+    nnnode/.style = {circle, draw=black, fill=white, minimum size=16pt,},
+}
+
+\tikzstyle{solid_line}=[solid, thick, mark=none]
+\tikzset{every picture/.style={semithick, >=stealth'}}
+\tikzset{myline/.style={line width = 0.05cm, rounded corners=5mm}}
+\tikzset{myarrow/.style={line width = 0.05cm, ->, rounded corners=5mm}}
+\tikzset{myaxis/.style={thick, ->, line cap=rect}}
+\tikzset{roundednode/.style={rounded corners=4mm,draw=black,fill=white,line width=0.05cm, minimum size=0.35in, align=center}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\smallcaps}[1]{\textsc{#1}}
+
+\usepackage{mdframed}
+\definecolor{shadecolor}{rgb}{1,0.8,0.3}
+\newenvironment{algorithmblock}[1][htbp]
+{\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
+{\end{mdframed}}
+
+\newenvironment{definitionblock}[1]{%
+    \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]
+        \textbf{Definition: #1.}\;
+}{%
+    \end{mdframed}
+}
+
+\newenvironment{centerjuliaverbatim}{%
+  \par
+  \centering
+  \varwidth{\linewidth}%
+  \juliaverbatim
+}{%
+  \endjuliaverbatim
+  \endvarwidth
+  \par
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setbeamercolor{itemize item}{fg=black}
 \setbeamercolor{itemize subitem}{fg=black}
 \setbeamercolor{itemize subsubitem}{fg=black}
+\setbeamercolor{section head}{fg=cardinal} % currently unused.
 
 \setbeamertemplate{itemize item}[circle]
 \setbeamertemplate{itemize subitem}{{\textendash}}
@@ -113,9 +201,20 @@
     \insertframetitle
 }
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{title}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}{\textsc{\insertsectionhead}}}\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Math
+% Math definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\dset}{\mathcal{D}}
 \newcommand{\params}{\vect \theta}
 
@@ -218,60 +317,14 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Colors
-\definecolor{cardinal}{RGB}{140,21,21} % https://web.stanford.edu/group/webdev/identity/public/color.html
-\definecolor{coolgrey}{RGB}{77,79,83} % https://web.stanford.edu/group/webdev/identity/public/color.html
-
-\definecolor{stanfordred}{RGB}{140,21,21}
-\definecolor{darkgreen}{RGB}{21,140,21}
-\definecolor{darkblue}{RGB}{21,21,140}
-\definecolor{sun}{RGB}{234,171,0}
-\colorlet{shadecolor}{black!5}
-
-\newcommand{\darkblue}[1]{{\color{darkblue} #1}}
-\newcommand{\darkgreen}[1]{{\color{darkgreen} #1}}
-\newcommand{\darkred}[1]{{\color{stanfordred} #1}}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TikZ settings
-\usetikzlibrary{calc}
-\usetikzlibrary{fit}
-\usetikzlibrary{positioning}
-\usetikzlibrary{arrows}
-\usetikzlibrary{arrows.meta}
-\usetikzlibrary{decorations.pathreplacing}
-\usetikzlibrary{decorations.pathmorphing}
-\usetikzlibrary{decorations.text}
-\usetikzlibrary{patterns}
-\usetikzlibrary{graphs}
-\usetikzlibrary{graphdrawing}
-\usetikzlibrary{shapes}
-
-\tikzset{
-    func/.style = {rectangle, rounded corners=1, draw},
-    partial/.style = {rectangle, darkgreen, font=\bfseries},
-    input/.style = {rectangle},
-    nnnode/.style = {circle, draw=black, fill=white, minimum size=16pt,},
-}
-
-\tikzstyle{solid_line}=[solid, thick, mark=none]
-\tikzset{every picture/.style={semithick, >=stealth'}}
-\tikzset{myline/.style={line width = 0.05cm, rounded corners=5mm}}
-\tikzset{myarrow/.style={line width = 0.05cm, ->, rounded corners=5mm}}
-\tikzset{myaxis/.style={thick, ->, line cap=rect}}
-\tikzset{roundednode/.style={rounded corners=4mm,draw=black,fill=white,line width=0.05cm, minimum size=0.35in, align=center}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Algorithm style.
-% \algtext*{EndLoop} % Remove "end _X_" text
-% \algtext*{EndIf}
-% \algtext*{EndFunction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand\algorithmicthen{} % Remove "then"
 \renewcommand\algorithmicdo{} % Remove "do"
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auxiliary files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{title}
 \input{arrows_and_braces}
