@@ -1,7 +1,7 @@
 function get_files(; slides_regex::Regex = r"include\{slides")
     retval = String[]
     for line in readlines(joinpath("tex", "main.tex"))
-        if occursin(slides_regex, line)
+        if occursin(slides_regex, line) && lstrip(line)[1] != '%'
             m = match(r"slides/\S*(?=\})", line)
             @assert isa(m, RegexMatch)
             push!(retval, joinpath("tex", m.match*".tex"))
@@ -86,7 +86,7 @@ for filepath in get_files()
     lines = [replace(line, "\n"=>"") for line in open(readlines, filepath, "r")]
 
     counter = 0
-    i = something(findfirst(x-> x ∈ ["\\begin{algorithm}", "\\begin{exalgorithm}"], lines), 0) + 1
+    i = something(findfirst(x-> x ∈ ["\\begin{algorithmblock}"], lines), 0) + 1
     while i != 1
 
         replacements = Dict{String,String}()
@@ -116,7 +116,7 @@ for filepath in get_files()
         end
         println(io, "#"^20, "\n")
 
-        i = something(findnext(x-> x ∈ ["\\begin{algorithm}", "\\begin{exalgorithm}"], lines, j), 0) + 1
+        i = something(findnext(x-> x ∈ ["\\begin{algorithmblock}"], lines, j), 0) + 1
     end
 end
 close(io)

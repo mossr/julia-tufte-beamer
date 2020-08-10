@@ -1,0 +1,57 @@
+\begin{frame}{Algorithms}
+
+\begin{itemize}
+    \scriptsize
+    \item Monte Carlo tree search (MCTS) is an anytime algorithm that uses rollouts of a random policy to estimate the value of each state-action node in the tree.\footcite{coulom2006efficient}
+    \item There are four main stages in each simulation: \textit{selection}, \textit{expansion}, \textit{rollout} (or \textit{simulation}), and \textit{backpropagation}.
+    \item The tree $\mathcal{T}$ is iteratively expanded and the policy improves over time as the algorithm balances exploration with exploitation of the state and action spaces.
+\end{itemize}
+
+\begin{columns}[T,onlytextwidth]
+    \scalebox{0.5}{
+    \begin{column}{\columnwidth}
+        \begin{algorithm}[H]
+            \caption{Top-level Monte Carlo tree search algorithm.}
+            \label{alg:mcts-pw}
+            \begin{algorithmic}
+            \Function{MonteCarloTreeSearch$(s, d)$}{}
+            \Loop {}
+                \State \textproc{Simulate}$(s,d)$
+            \EndLoop
+            \State \Return $\argmax\limits_{\bar{a} \in A(s)} Q(s, \bar{a})$
+            \EndFunction
+            \end{algorithmic}
+        \end{algorithm}
+    \end{column}%
+    }
+%
+    \scalebox{0.5}{
+    \begin{column}{\columnwidth}
+        \begin{algorithm}[H]
+            \caption{Monte Carlo tree search simulation.}
+            \label{alg:mcts-pw-simulate}
+            \begin{algorithmic}
+            \Function{Simulate$(s, d)$}{}
+            \If {$d=0$}
+                \State \Return $0$
+            \EndIf
+            \If {$s \not\in \mathcal{T}$}
+                \State $\mathcal{T} \leftarrow \mathcal{T} \cup \{s\}$
+                \State $N(s) \leftarrow N_0(s)$
+                \State \Return \textproc{Rollout}$(s,d)$
+            \EndIf
+            \State $N(s) \leftarrow N(s) + 1$
+            \State $\bar{a} \leftarrow \textproc{SelectAction}(s)$ \algorithmiccomment{selection}
+            \State $(s^\prime, r) \leftarrow \textproc{DeterministicStep}(s,\bar{a})$ \algorithmiccomment{expansion}
+            \State $q \leftarrow r + \gamma \textproc{Simulate}(s^\prime, d-1)$ \algorithmiccomment{simulation/rollout}
+            \State $N(s,\bar{a}) \leftarrow N(s,\bar{a})+1$
+            \State $Q(s,\bar{a}) \leftarrow Q(s,\bar{a})+\frac{q-Q(s,\bar{a})}{N(s,\bar{a})}$ \algorithmiccomment{backpropagation}
+            \State \Return $q$
+            \EndFunction
+            \end{algorithmic}
+        \end{algorithm}
+    \end{column}%
+    }
+\end{columns}
+
+\end{frame}

@@ -20,7 +20,7 @@ compile-core:
 	-julia --color=yes jl/pull_julia_code.jl && \
 	lualatex -shell-escape --aux-directory=output --include-directory=tex --include-directory=output $(MAIN) && \
 	pythontex output/$$(basename $(MAIN)) && \
-	biber --input-directory=tex output/$$(basename $(MAIN)) && \
+	biber --input-directory=tex output/main && \
 	lualatex -shell-escape --aux-directory=output --include-directory=tex --include-directory=output $(MAIN)
 
 

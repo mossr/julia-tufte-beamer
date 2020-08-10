@@ -1,0 +1,19 @@
+% [fragile] needed when the content contains juliaverbatim.
+\begin{frame}[fragile]{Definition blocks}
+
+Example use of a \texttt{definitionblock} environment with accompanying Julia code.
+
+\begin{definitionblock}{score}
+    The score on an example $(x,y)$ is $\vec{w}\cdot \phi(x)$, how \textit{confident} we are in predicting $+1$. Score is a weighted combination of features:
+    \[
+        \vec{w} \cdot \phi(x) = \sum_{j=1}^d w_j \phi(x)_j
+    \]
+\end{definitionblock}
+
+\begin{algorithmblock}
+\begin{juliaverbatim}
+score(x, 𝐰, φ) = 𝐰⋅φ(x)
+\end{juliaverbatim}
+\end{algorithmblock}
+
+\end{frame}

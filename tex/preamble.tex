@@ -8,17 +8,23 @@
 \usepackage{mathtools}
 \usepackage[tracking=true]{microtype}
 
-
 \usepackage{bold-extra}
 \usepackage{realscripts}
 \usepackage{amsmath,bm,amssymb}
 \usepackage{amsthm}
 \usepackage{bbm}
-\usepackage{booktabs}
 \usepackage{tikz}
 \usepackage[group-digits=integer,group-minimum-digits=4,group-separator={,},detect-all]{siunitx}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 \usepackage{textpos}
+\usepackage{xcolor}
+\usepackage{multirow}
+\usepackage{longtable,tabularx,booktabs}
+\usepackage[flushleft]{threeparttable}
+
+\newcommand{\smallcaps}[1]{\textsc{#1}}
 
 \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 \usepackage{newunicodechar}
@@ -66,13 +72,16 @@
 
 \usepackage{mdframed}
 \definecolor{shadecolor}{rgb}{1,0.8,0.3}
-\newenvironment{algorithm}[1][htbp]
+\newenvironment{algorithmblock}[1][htbp]
 {\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
 {\end{mdframed}}
 
-
-\input{title}
-\input{arrows_and_braces}
+\newenvironment{definitionblock}[1]{%
+    \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]
+        \textbf{Definition: #1.}\;
+}{%
+    \end{mdframed}
+}
 
 
 \begin{jlcode}
@@ -161,3 +170,108 @@
     \subjectto & & #3 \\
 \end{aligned}
 }
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\SD}{SD}
+\DeclareMathOperator{\Ber}{Ber}
+\DeclareMathOperator{\Bin}{Bin}
+\DeclareMathOperator{\Poi}{Poi}
+\DeclareMathOperator{\Geo}{Geo}
+\DeclareMathOperator{\NegBin}{NegBin}
+\DeclareMathOperator{\Uni}{Uni}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\Dir}{Dir}
+\newcommand*\Eval[1]{\left.#1\right\rvert} % derivative/integration evaluation bar |
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\BetaDistribution}{Beta}
+\DeclareMathOperator{\Beta}{Beta}
+\DeclareMathOperator{\GammaDist}{Gamma}
+\DeclareMathOperator{\Gumbel}{Gumbel}
+\DeclareMathOperator{\Std}{Std}
+\DeclareMathOperator{\Train}{\mathcal{D}_{\text{train}}}
+\DeclareMathOperator{\Dtrain}{\mathcal{D}_{\text{train}}}
+\DeclareMathOperator{\TrainLoss}{TrainLoss}
+\DeclareMathOperator{\Loss}{Loss}
+\DeclareMathOperator{\ZeroOneLoss}{Loss_{0\text{-}1}}
+\DeclareMathOperator{\SquaredLoss}{Loss_{\text{squared}}}
+\DeclareMathOperator{\AbsDevLoss}{Loss_{\text{absdev}}}
+\DeclareMathOperator{\HingeLoss}{Loss_{\text{hinge}}}
+\DeclareMathOperator{\LogisticLoss}{Loss_{\text{logistic}}}
+\newcommand{\bfw}{\mathbf{w}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Miss}{Miss}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\1}{\mathbb{1}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\V}{\mathbf{V}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\h}{\mathbf{h}}
+\newcommand{\opt}{*}
+\DeclareMathOperator{\States}{States}
+\DeclareMathOperator{\StartState}{s_{\text{state}}}
+\DeclareMathOperator{\Actions}{Actions}
+\DeclareMathOperator{\Reward}{Reward}
+\DeclareMathOperator{\IsEnd}{IsEnd}
+\DeclareMathOperator{\Cost}{Cost}
+\DeclareMathOperator{\FutureCost}{FutureCost}
+\DeclareMathOperator{\Succ}{Succ}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors
+\definecolor{cardinal}{RGB}{140,21,21} % https://web.stanford.edu/group/webdev/identity/public/color.html
+\definecolor{coolgrey}{RGB}{77,79,83} % https://web.stanford.edu/group/webdev/identity/public/color.html
+
+\definecolor{stanfordred}{RGB}{140,21,21}
+\definecolor{darkgreen}{RGB}{21,140,21}
+\definecolor{darkblue}{RGB}{21,21,140}
+\definecolor{sun}{RGB}{234,171,0}
+\colorlet{shadecolor}{black!5}
+
+\newcommand{\darkblue}[1]{{\color{darkblue} #1}}
+\newcommand{\darkgreen}[1]{{\color{darkgreen} #1}}
+\newcommand{\darkred}[1]{{\color{stanfordred} #1}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TikZ settings
+\usetikzlibrary{calc}
+\usetikzlibrary{fit}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{patterns}
+\usetikzlibrary{graphs}
+\usetikzlibrary{graphdrawing}
+\usetikzlibrary{shapes}
+
+\tikzset{
+    func/.style = {rectangle, rounded corners=1, draw},
+    partial/.style = {rectangle, darkgreen, font=\bfseries},
+    input/.style = {rectangle},
+    nnnode/.style = {circle, draw=black, fill=white, minimum size=16pt,},
+}
+
+\tikzstyle{solid_line}=[solid, thick, mark=none]
+\tikzset{every picture/.style={semithick, >=stealth'}}
+\tikzset{myline/.style={line width = 0.05cm, rounded corners=5mm}}
+\tikzset{myarrow/.style={line width = 0.05cm, ->, rounded corners=5mm}}
+\tikzset{myaxis/.style={thick, ->, line cap=rect}}
+\tikzset{roundednode/.style={rounded corners=4mm,draw=black,fill=white,line width=0.05cm, minimum size=0.35in, align=center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Algorithm style.
+% \algtext*{EndLoop} % Remove "end _X_" text
+% \algtext*{EndIf}
+% \algtext*{EndFunction}
+\renewcommand\algorithmicthen{} % Remove "then"
+\renewcommand\algorithmicdo{} % Remove "do"
+
+
+\input{title}
+\input{arrows_and_braces}

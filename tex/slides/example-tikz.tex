@@ -1,0 +1,51 @@
+% [fragile] needed when the content contains juliaverbatim.
+\begin{frame}[fragile]{TikZ figures}
+
+For a neural network with one hidden layer, the intermediate hidden units are $h_j = \sigma(\v_j \cdot \phi(x))$ where $\sigma(z) = (1 + e^{-z})^{-1}$, producing output $\text{score} = \w \cdot \h$:
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+    \node (phi2) [nnnode, label=left:{$\phi(x)_2$}] {};
+    \node (phi1) [nnnode, above=2mm of phi2, label=left:{$\phi(x)_1$}] {};
+    \node (phi3) [nnnode, below=2mm of phi2, label=left:{$\phi(x)_3$}] {};
+
+    \node (hidden1) [nnnode, above right=0mm and 15mm of phi2, label=above:{$h_1$}] {$\darkblue{\sigma}$};
+    \node (hidden2) [nnnode, below right=0mm and 15mm of phi2, label=below:{$h_2$}] {$\darkblue{\sigma}$};
+
+    \node (score) [nnnode, right=30mm of phi2, label=above:{score}] {};
+
+    \draw[->] (phi1) -- (hidden1) node [midway, yshift=7pt] {$\darkred{\V}$};
+    \draw[->] (hidden1) -- (score) node [midway, yshift=7pt] {$\darkred{\w}$};
+    \draw[->] (phi1) -- (hidden2);
+    \draw[->] (phi2) -- (hidden1);
+    \draw[->] (phi2) -- (hidden2);
+    \draw[->] (phi3) -- (hidden1);
+    \draw[->] (phi3) -- (hidden2);
+    \draw[->] (hidden1) -- (score);
+    \draw[->] (hidden2) -- (score);
+\end{tikzpicture}
+\end{center}
+\caption{
+    \scriptsize
+    \label{fig:nn}
+    A \textit{one-layer neural network} with $\phi(x) \in \R^3$ and $\h \in \R^2$ using the logistic activation function $\sigma$.
+}
+\end{figure}
+
+\vspace{-5mm}
+
+{\scriptsize
+\begin{algorithmblock}
+\begin{juliaverbatim}
+σ(z) = 1/(1 + exp(-z)) # sigmoid
+
+function neural_network(x, 𝐕, 𝐰, φ, g::Function=σ)
+    𝐡 = map(𝐯ⱼ -> g(𝐯ⱼ ⋅ φ(x)), 𝐕)
+    𝐰 ⋅ 𝐡
+end
+\end{juliaverbatim}
+\end{algorithmblock}
+}
+
+\end{frame}

@@ -1,0 +1,29 @@
+\begin{frame}{Tables}
+
+Example table with footnotes.
+
+\begin{table}[!t]
+    \centering
+    \caption{\label{tab:mcts_params} Algorithm Hyperparameters}
+    \begin{threeparttable}
+    \begin{tabular}{@{}lr@{}}
+        \toprule
+        \textbf{Hyperparameter} & \textbf{Value} \\
+        \midrule
+        episodes \tnote{*} & $5000$ \\
+        maximum tree depth $d_\text{max}$ (i.e. number of waypoints) \tnote{*} & $12$ \\
+        rollout depth $d$ \tnote{$\dagger$} & $12$ \\
+        exploration constant $c$ & $10$ \\
+        progressive widening $k$ & $10$ \\
+        progressive widening $\alpha$ & $0.3$ \\
+        \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+        \scriptsize
+        \item[*] {Used by all algorithms.}
+        \item[$\dagger$] {Used by MCTS and direct Monte Carlo.}
+    \end{tablenotes}
+    \end{threeparttable}
+\end{table}
+
+\end{frame}
