@@ -4,8 +4,71 @@ A beamer template using Tufte-LaTeX style with Julia code integration similar to
 
 Forked from [simple-tufte-beamer](https://github.com/ViniciusBRodrigues/simple-tufte-beamer) and framework modified from [tufte_algorithms_book](https://github.com/sisl/tufte_algorithms_book).
 
+
+### Example
 See example slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blob/master/main.pdf)
 
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/1_title.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/2_juliaverbatim.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/3_juliaconsole.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/4_plotting.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/5_tikz.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/6_algorithms.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/7_definitions.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/8_tables.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/9_bullets.svg">
+</p>
+
+---
+
+<p align="center">
+  <img src="https://github.com/mossr/julia-tufte-beamer/blob/master/svg/10_references.svg">
+</p>
+
+---
 
 # Installation
 Install [Julia](https://julialang.org/downloads/).
