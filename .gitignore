@@ -17,7 +17,3 @@ tmp*
 output/
 sandbox.pdf
 presentation.pdf
-
-juliaplots.sty/
-lexer/
-style/
