@@ -1,0 +1,45 @@
+\begin{frame}[fragile]{Example: Crying Baby Problem}
+
+\begin{columns}[T,onlytextwidth]
+    \begin{column}{0.55\columnwidth}
+        \begin{figure}
+            \centering
+            \begin{tikzpicture}
+                \node[minimum size=1cm, draw=black, fill=white, circle] (s) {$s_t$};
+                \node[minimum size=1cm, draw=black, fill=white, circle, right=0.8cm of s] (s2) {$s_{t+1}$};
+                \node[minimum size=1cm, draw=pastelBlue, fill=pastelBlue!40, circle, below=0.5cm of s] (o) {$o_t$};
+                \node[minimum size=1cm, draw=black, fill=white, diamond, above=0.5cm of s] (r) {$r_t$};
+                \node[minimum size=0.8cm, draw=black, fill=white, rectangle, above=0.5cm of r] (a) {$a_t$};
+                \node[left=0.1 of a, anchor=east] {Feed};
+                \node[left=0.1 of r, anchor=east] {Reward};
+                \node[left=0.1 of s, anchor=east] {Hungry};
+                \node[left=0.1 of o, anchor=east] {Crying};
+                \draw[->] (s) -- (o);
+                \draw[->] (s) -- (s2);
+                \draw[->] (s) -- (r);
+                \draw[->] (a) -- (r);
+                \draw[->] (a) -- (s2);
+            \end{tikzpicture}
+            \caption{
+                \label{fig:crying_baby_pomdp}
+                The crying baby POMDP.
+            }
+        \end{figure}
+    \end{column}
+    \begin{column}{0.45\columnwidth}
+        \begin{itemize}
+            \item A simple POMDP with 2 states, 3 actions, and 2 observations:
+            \begin{align*}
+                \mathcal{S} &= \{\text{hungry},\, \text{sated}\}\\
+                \mathcal{A} &= \{\text{feed},\, \text{sing},\, \text{ignore}\}\\
+                \mathcal{O} &= \{\text{crying},\, \text{quiet}\}
+            \end{align*}
+            \item See Pluto notebook:
+            \begin{itemize}
+                \item \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/mossr/StateEstimation.jl/master/html/crying_baby_problem.html}{\color{cardinal}crying\_baby\_problem.html}
+            \end{itemize}
+        \end{itemize}
+    \end{column}
+\end{columns}
+
+\end{frame}
