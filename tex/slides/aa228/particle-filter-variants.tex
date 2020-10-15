@@ -1,0 +1,25 @@
+\begin{frame}[fragile]{Particle Filter Variants}
+
+\textbf{Particle filter with rejection}:
+\begin{itemize}
+    \item Used in problems with discrete observations.
+    \item Any sampled observation that does not equal the true observation is rejected.
+    \item Problem of \textit{particle deprivation}: lack of particles near the true state.\footnote{Due to low particle coverage given the stochastic nature of resampling.}
+\end{itemize}
+
+\vspace{5mm}
+\textbf{Injection particle filter}:
+\begin{itemize}
+    \item Inject random particles to protect against particle deprivation.
+\end{itemize}
+
+\vspace{5mm}
+\textbf{Adaptive injection particle filter}:
+\begin{itemize}
+    \item Inject particles adaptively based on a ratio of two exponentially moving averages of the mean particle weights (using \textit{fast} and \textit{slow} moving averages).
+\end{itemize}
+
+\vspace{2mm}
+See Pluto notebook: \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/mossr/StateEstimation.jl/master/html/particle_filter.html}{\color{cardinal}StateEstimation.jl/particle\_filter.html}
+
+\end{frame}

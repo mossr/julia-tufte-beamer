@@ -1,0 +1,22 @@
+\begin{frame}[fragile]{Kalman Filter}
+
+% \begin{definitionblock}{Filter}
+% A process that remove noise from data.\footnote{Often used in signal processing, effectively ``filtering'' out the noise.}
+% \end{definitionblock}
+To update beliefs with \textit{continuous} state spaces, we integrate instead of sum:
+\begin{gather*}
+    b^\prime(s^\prime) \propto O(o \mid a, s^\prime)\int T(s^\prime \mid s, a)b(s)\;ds    
+\end{gather*}
+
+A \textit{Kalman filter} assumes that $T$ and $O$ are linear-Gaussian and $b$ is Gaussian:
+\begin{align*}
+    T(\mathbf{s}^\prime \mid \mathbf s, \mathbf a) &= \mathcal{N}(\mathbf{s}^\prime \mid \mathbf{T}_s \mathbf{s} + \mathbf{T}_a \mathbf{a},\, \mat{\Sigma}_s)\\
+    O(\mathbf o \mid \mathbf{s}^\prime) &= \mathcal{N}(\mathbf o \mid \mathbf{O}_s \mathbf{s}^\prime,\, \mat{\Sigma}_o)\\
+    b(\mathbf{s}) &= \mathcal{N}(\mathbf{s} \mid \vec{\mu}_b,\, \mat{\Sigma}_b)
+\end{align*}
+
+% \vspace{5mm}
+
+See Pluto notebook: \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/mossr/StateEstimation.jl/master/html/kalman_filter.html}{\color{cardinal}StateEstimation.jl/kalman\_filter.html}
+
+\end{frame}
