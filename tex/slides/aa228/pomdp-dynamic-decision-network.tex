@@ -1,0 +1,34 @@
+\begin{frame}[fragile]{Dynamic Decision Network for POMDPs}
+
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[x=1cm, y=1cm]
+        \node[minimum size=1cm, draw=black, fill=white, circle] (s) {$s_t$};
+        \node[minimum size=1cm, draw=black, fill=white, circle, right=1cm of s] (s2) {$s_{t+1}$};
+        \node[minimum size=1cm, draw=pastelBlue, fill=pastelBlue!40, circle, below=0.5cm of s] (o) {$o_t$};
+        \node[minimum size=1.3cm, draw=black, fill=white, diamond, above=0.5cm of s] (r) {$r_t$};
+        \node[minimum size=1cm, draw=black, fill=white, rectangle, above=0.5cm of r] (a) {$a_t$};
+        \node[minimum size=1cm, draw=black, fill=white, rectangle, left=1cm of a] (am1) {$a_{t-1}$};
+
+        \node[minimum size=1.3cm, draw=lightgray, fill=white, diamond] (rm1) at (am1|-r) {\textcolor{lightgray}{$r_{t-1}$}};
+        \node[minimum size=1cm,   draw=lightgray, fill=white, circle]  (sm1) at (am1|-s) {\textcolor{lightgray}{$s_{t-1}$}};
+        \node[minimum size=1cm,   draw=lightgray, fill=white, circle]  (om1) at (am1|-o) {\textcolor{lightgray}{$o_{t-1}$}};
+
+        \node[minimum size=1cm,   draw=lightgray, fill=white, rectangle] (ap1) at (s2|-a) {\textcolor{lightgray}{$a_{t+1}$}};
+        \node[minimum size=1.3cm, draw=lightgray, fill=white, diamond]   (rp1) at (s2|-r) {\textcolor{lightgray}{$r_{t+1}$}};
+        \node[minimum size=1cm,   draw=lightgray, fill=white, circle]    (op1) at (s2|-o) {\textcolor{lightgray}{$o_{t+1}$}};
+
+        \draw[->] (s) -- (o);
+        \draw[->] (s) -- (s2);
+        \draw[->] (s) -- (r);
+        \draw[->] (a) -- (r);
+        \draw[->] (a) [out=0,in=135] to (s2);
+        \draw[->] (am1) [out=0,in=135] to (o);
+    \end{tikzpicture}
+    \caption{
+        \label{fig:su_beliefs_pomdp_trellis}
+        A dynamic decision network for the POMDP problem formulation.
+    }
+\end{figure}
+
+\end{frame}

@@ -1,0 +1,20 @@
+\begin{frame}[fragile]{Updating Beliefs: Derivation Explained}
+
+\begin{align*}
+    b^\prime(s^\prime) &= P(s^\prime \mid b, a, o) \tag{probability of being in state $s^\prime$}\\
+                       &\propto P(o \mid b, a, s^\prime) P(s^\prime \mid b, a) \tag{Bayes' rule, dropping normalization}\\
+                       &\propto O(o \mid a, s^\prime) P(s^\prime \mid b, a)\tag{observation model def., $o$ independent of $b$}\\
+                       &\propto O(o \mid a, s^\prime) \sum_s P(s^\prime \mid b, a, s) P(s \mid b, a) \tag{law of total probability}\\
+                       &\propto O(o \mid a, s^\prime)\sum_s T(s^\prime \mid s, a)b(s) \tag{state transition model, belief def.}
+\end{align*}
+
+\hrule
+
+\vspace{5mm}
+
+\begin{equation*}
+    \textbf{Exact belief updating:}\footnote{Then normalize so beliefs sum to one.}\quad b^\prime(s^\prime) \propto O(o \mid a, s^\prime)\sum_s T(s^\prime \mid s, a)b(s)
+\end{equation*}
+
+
+\end{frame}
