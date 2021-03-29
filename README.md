@@ -74,6 +74,7 @@ See example slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blo
 Install [Julia](https://julialang.org/downloads/).
 
 Install LaTeX via texlive. We recommend [this repo](https://github.com/scottkosty/install-tl-ubuntu).
+- Install the `lm-math` package to get the LatinModernMath font.
 
 Clone the repository to a location of your choosing:
 ```
