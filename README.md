@@ -90,7 +90,7 @@ git submodule update
 Install lexer and style (may need `pip3` instead):
 ```
 pip install --upgrade git+https://github.com/sisl/pygments-julia#egg=pygments_julia
-pip install --upgrade git+https://github.com/sisl/pygments-style-algfordm#egg=pygments_style_algfordm
+pip install --upgrade git+https://github.com/sisl/pygments-style-algforopt#egg=pygments_style_algforopt
 ```
 
 Install the required Julia packages.
