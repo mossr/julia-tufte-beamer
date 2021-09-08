@@ -106,7 +106,7 @@ For `pdf2svg` on Windows (place `dist-*` directory on PATH): https://github.com/
 
 Install [pgfplots](https://ctan.org/pkg/pgfplots).
 
-We require pythontex 0.17, which was just recently tagged. You will probably have to update your version on texlive on miktex. Alternatively, you can download the latest version of pythontex from https://github.com/gpoore/pythontex.
+We require pythontex, which you can get from texlive or miktex. Alternatively, you can download the latest version of pythontex from https://github.com/gpoore/pythontex.
 
 (Note that on arch-based systems, one should use tllocalmgr instead.)
 

@@ -94,7 +94,7 @@
 \usetikzlibrary{shapes}
 
 \usepackage[pgfplots]{juliaplots.sty/juliaplots}
-\setpythontexpygopt{style=algforopt}
+\setpythontexpygopt{style=algfordm}
 \pgfplotsset{compat=newest}
 \pgfplotsset{every axis legend/.append style={legend cell align=left, font=\footnotesize, draw=none, fill=none}}
 \pgfplotsset{every axis/.append style={axis background/.style={fill=white}}}
