@@ -76,41 +76,35 @@ See example slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blo
 Install [Julia](https://julialang.org/downloads/).
 
 Install LaTeX via texlive. We recommend [this repo](https://github.com/scottkosty/install-tl-ubuntu).
+- Install the `lm-math` package to get the LatinModernMath font.
 
 Clone the repository to a location of your choosing:
 ```
 git clone https://github.com/mossr/julia-tufte-beamer.git
 ```
 
-Initialize and update the submodules:
+Initialize and update the submodule ([juliaplots.sty](https://github.com/sisl/juliaplots.sty)):
 ```
 git submodule init
 git submodule update
 ```
 
-Compile the style:
+Install lexer and style (may need `pip3` instead):
 ```
-cd style
-sudo python setup.py install
-cd ..
-```
-
-Compile the lexer:
-```
-cd lexer
-sudo python setup.py install
-cd ..
+pip install --upgrade git+https://github.com/sisl/pygments-julia#egg=pygments_julia
+pip install --upgrade git+https://github.com/sisl/pygments-style-algfordm#egg=pygments_style_algfordm
 ```
 
 Install the required Julia packages.
 ```
-make install
+julia jl/install.jl
 ```
 
 Install `pdf2svg`, which is used by PGFPlots (we assume Ubuntu - other operating systems may install pdf2svg differently):
 ```
 sudo apt-get install pdf2svg
 ```
+For `pdf2svg` on Windows (place `dist-*` directory on PATH): https://github.com/jalios/pdf2svg-windows
 
 Install [pgfplots](https://ctan.org/pkg/pgfplots).
 
@@ -120,18 +114,21 @@ We require pythontex 0.17, which was just recently tagged. You will probably hav
 
 ## Test
 
-Running `make test` pulls all the code and then runs all tests in `juliatest` blocks. See `runtests.jl` for details.
+Running the following pulls all the code and then runs all tests in `juliatest` blocks. See `runtests.jl` for details.
+
+```
+julia jl/runtests.jl
+```
 
 ## Compilation
 
-* `make compile` compiles the whole presentation (`make main` works too)
-* `make sandbox` will compile `tex/sandbox.tex` (meant for development, e.g., single slides)
-* `make quick` will only run `lualatex` (skipping `pythontex` and `biber` for quick LaTeX compilation)
-    * `make quick-sandbox` does quick compilation for `tex/sandbox.tex`
-* `make clean` removes all generated files except `main.pdf` and `sandbox.pdf`
-* `make full` runs `clean` and `compile`
-    * `make full-sandbox` does full clean/compilation for `tex/sandbox.tex`
-* `make save` copies the `main.pdf` file to `presentation.pdf` (which you can modify in the makefile)
+Install `latexmk` from: https://mg.readthedocs.io/latexmk.html#installation
+
+* `latexmk` will compile everything (see `output/` for PDF).
+    * `latexmk` will intelligently compile only the necessary bits.
+* `latexmk -c` will clean up generated files.
+* `latexmk -C` will clean up generated files (including `.pdf`).
+* `latexmk tex/sandbox.tex` will compile `tex/sandbox.tex` (meant for development, e.g., single files)
 
 
 ## Directory structure

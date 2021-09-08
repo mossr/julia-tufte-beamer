@@ -1,9 +1,3 @@
-[submodule "style"]
-	path = style
-	url = https://github.com/sisl/pygments-style-algforopt
-[submodule "lexer"]
-	path = lexer
-	url = https://github.com/sisl/pygments-julia
 [submodule "juliaplots.sty"]
 	path = juliaplots.sty
 	url = https://github.com/sisl/juliaplots.sty
