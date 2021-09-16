@@ -1,3 +1,4 @@
+\PassOptionsToPackage{table}{xcolor}
 \documentclass[aspectratio=169]{beamer}
 
 \setbeamertemplate{title page}[default][left] % left-align title page (commend out for centered title page)
@@ -5,12 +6,26 @@
 
 \input{preamble}
 
-\title{Beliefs: State Uncertainty}
-\subtitle{AA228/CS238 Decision Making Under Uncertainty\footcite{Kochenderfer2020}}
+\input{julia_font}
+\input{julia_listings}
+
+\lstdefinelanguage{JuliaLocal}{
+    language = Julia, % inherit Julia lang. to add keywords
+    morekeywords=[3]{reward, states, actions, transition, termination, initialstate, discount, isterminal, observations, T, R, O}, % define more functions
+    morekeywords=[2]{QuickMDP, QuickPOMDP, SparseCat, State, Action, Deterministic, POMDPs, POMDPModelTools, QuickPOMDPs, GridWorld, MDP}, % define more types and modules
+}
+
+\title{\Large{J}\normalsize{ULIA} \Large{A}\normalsize{CADEMY}: \Large{POMDP}\normalsize{S.JL}} % bold small-caps hack :)
+\subtitle{Decision Making Under Uncertainty\blfootnote{Slides created with \url{https://github.com/mossr/julia-tufte-beamer}}}
 \author{Robert Moss}
-\institute{Stanford University}
-\email{mossr@cs.stanford.edu}
-\date{October 28, 2020}
+\institute{CS PhD Student, Stanford University}
+\email{mossr@stanford.edu}
+\date{September, 2021}
+
+\titlegraphic{
+\begin{picture}(0,0)
+    \put(400,75){\makebox(0,0)[rt]{\includegraphics[scale=0.4]{images/pomdps_logo.pdf}}}
+\end{picture}}
 
 
 \begin{document}
@@ -22,33 +37,21 @@
 \end{frame}
 
 % Chapter 19: Beliefs
-\include{slides/aa228/introduction}
-\include{slides/aa228/observation-space}
-\include{slides/aa228/pomdp-dynamic-decision-network}
-\include{slides/aa228/representation}
-\include{slides/aa228/algorithms}
-\include{slides/aa228/initialization}
-\include{slides/aa228/belief-inference}
-\include{slides/aa228/belief-vector}
-\include{slides/aa228/discrete-state-filter}
-\include{slides/aa228/belief-updates-expanded}
-\include{slides/aa228/crying-baby-problem}
-\include{slides/aa228/kalman-filter}
-% \include{slides/aa228/extended-kalman-filter}
-% \include{slides/aa228/unscented-kalman-filter}
-\include{slides/aa228/particle-filter}
-\include{slides/aa228/particle-filter-variants}
-% \include{slides/aa228/belief-summary}
-
-% Chapter 20: Exact Belief State Planning
-% \section{Exact Belief State Planning}
-% \include{slides/aa228/introduction-planning}
-% \include{slides/aa228/belief-state-mdp}
-% \include{slides/aa228/conditional-plans}
-% \include{slides/aa228/alpha-vectors}
-% \include{slides/aa228/pomdp-value-iteration}
-% \include{slides/aa228/linear-policies}
-% \include{slides/aa228/planning-summary}
+\include{slides/pomdps.jl/introduction}
+% \include{slides/aa228/pomdps}
+% \include{slides/aa228/observation-space}
+% \include{slides/aa228/pomdp-dynamic-decision-network}
+% \include{slides/aa228/representation}
+% \include{slides/aa228/algorithms}
+% \include{slides/aa228/initialization}
+% \include{slides/aa228/belief-inference}
+% \include{slides/aa228/belief-vector}
+% \include{slides/aa228/discrete-state-filter}
+% \include{slides/aa228/belief-updates-expanded}
+% \include{slides/aa228/crying-baby-problem}
+% \include{slides/aa228/kalman-filter}
+% \include{slides/aa228/particle-filter}
+% \include{slides/aa228/particle-filter-variants}
 
 
 

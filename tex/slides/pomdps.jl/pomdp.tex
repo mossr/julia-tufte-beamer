@@ -1,0 +1,176 @@
+%-------------------------------------------------
+
+\begin{frame}[fragile]{What is a POMDP?}
+
+\begin{definitionblock}{POMDP}
+    A \textit{Partially observable Markov decision process} (POMDP) is an MDP with \textit{state uncertainty}---meaning we cannot know the \textit{true} state, only a \textit{belief} about the true state using \textit{observations}.
+\end{definitionblock}
+
+\phantom{}
+
+\begin{itemize}
+    \item Formally, a POMDP is defined by the following:
+\end{itemize}
+\begin{table}[!t]
+    {\scriptsize
+    \centering
+    \caption{\label{tab:solutions} MDP Problem Formulation: $\langle \mathcal{S},\, \mathcal{A},\, {\color{darkblue}\mathcal{O}},\, T,\, R,\, {\color{darkblue}O},\, \gamma \rangle$}
+    % \rowcolors{2}{gray!15}{white}
+    \begin{threeparttable}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Variable} & \textbf{Description} & \textbf{\texttt{POMDPs} Interface} \\
+        \midrule
+        $\mathcal{S}$ & State space & \texttt{POMDPs.states} \\
+        $\mathcal{A}$ & Action space & \texttt{POMDPs.actions} \\
+        $\mathcal{O}$ & Observation space & \texttt{POMDPs.observations} \\
+        $T(s^\prime \mid s,a)$ & Transition function & \texttt{POMDPs.transition} \\
+        $R(s,a)$ & Reward function & \texttt{POMDPs.reward} \\
+        $O(o \mid s^\prime)$ & Observation function & \texttt{POMDPs.observation} \\
+        $\gamma \in [0,1]$ & Discount factor & \texttt{POMDPs.discount} \\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}
+    }
+\end{table}
+
+\begin{importantblock}
+    {\footnotesize
+    \begin{center}
+    Remember, a POMDP is a \textit{\textbf{problem formulation}} and \textit{\textbf{not an algorithm}}.
+  
+    A POMDP formulation enables the use of solution methods, i.e. algorithms.
+    \end{center}
+    }
+\end{importantblock}
+
+\end{frame}
+
+%-------------------------------------------------
+
+\begin{frame}[fragile]{Example POMDP: Crying Baby Problem}
+
+\begin{columns}[T,onlytextwidth]
+    \begin{column}{0.55\columnwidth}
+        \begin{figure}
+            \centering
+            \begin{tikzpicture}
+                \node[minimum size=1cm, draw=black, fill=white, circle] (s) {$s_t$};
+                \node[minimum size=1cm, draw=black, fill=white, circle, right=0.8cm of s] (s2) {$s_{t+1}$};
+                \node[minimum size=1cm, draw=pastelBlue, fill=pastelBlue!40, circle, below=0.5cm of s] (o) {$o_t$};
+                \node[minimum size=1cm, draw=black, fill=white, diamond, above=0.5cm of s] (r) {$r_t$};
+                \node[minimum size=0.8cm, draw=black, fill=white, rectangle, above=0.5cm of r] (a) {$a_t$};
+                \node[left=0.1 of a, anchor=east] {Feed};
+                \node[left=0.1 of r, anchor=east] {Reward};
+                \node[left=0.1 of s, anchor=east] {Hungry};
+                \node[left=0.1 of o, anchor=east] {Crying};
+                \draw[->] (s) -- (o);
+                \draw[->] (s) -- (s2);
+                \draw[->] (s) -- (r);
+                \draw[->] (a) -- (r);
+                \draw[->] (a) -- (s2);
+            \end{tikzpicture}
+            \caption{
+                \label{fig:crying_baby_pomdp}
+                The crying baby POMDP.
+            }
+        \end{figure}
+    \end{column}
+    \begin{column}{0.45\columnwidth}
+        \begin{itemize}
+            \item A simple POMDP with 2 states, 3 actions, and 2 observations:
+            \begin{align*}
+                \mathcal{S} &= \{\texttt{hungry},\, \texttt{sated}\}\\
+                \mathcal{A} &= \{\texttt{feed},\, \texttt{sing},\, \texttt{ignore}\}\\
+                \mathcal{O} &= \{\texttt{crying},\, \texttt{quiet}\}
+            \end{align*}
+        \end{itemize}
+    \end{column}
+\end{columns}
+
+\end{frame}
+
+%-------------------------------------------------
+
+\begin{frame}[fragile]{\texttt{QuickPOMDPs}: Crying Baby}
+
+\begin{lrbox}{\cryingbabycode}%
+\begin{lstlisting}[language=JuliaLocal, style=julia]
+crying_pomdp = QuickPOMDP(
+    states       = [hungry, full],  # 𝒮
+    actions      = [feed, ignore],  # 𝒜
+    observations = [crying, quiet], # 𝒪
+    initialstate = [full], # Deterministic
+    discount     = 0.9, # γ
+
+    transition = function T(s, a)
+        if a == feed
+            return SparseCat([hungry, full], [0, 1])
+        elseif s == hungry && a == ignore
+            return SparseCat([hungry, full], [1, 0])
+        elseif s == full && a == ignore
+            return SparseCat([hungry, full], [0.1, 0.9])
+        end
+    end,
+
+    observation = function O(s, a, s′)
+        if s′ == hungry
+            return SparseCat([crying, quiet], [0.8, 0.2])
+        elseif s′ == full
+            return SparseCat([crying, quiet], [0.1, 0.9])
+        end
+    end,
+    
+    reward = (s,a)->(s == hungry ? -10 : 0) + (a == feed ? -5 : 0)
+) 
+\end{lstlisting}
+\end{lrbox}%
+
+% print the listing box.
+\scalebox{0.3}{\usebox{\cryingbabycode}}
+
+\end{frame}
+
+%-------------------------------------------------
+
+\begin{frame}{POMDP solvers}
+
+A number of ways to solve POMDPs are implemented in the following packages.
+
+\begin{table}[!t]
+    {\tiny
+    \centering
+    \caption{\label{tab:solutions} POMDP Solution Methods}
+    \rowcolors{2}{white}{gray!15}
+    \begin{threeparttable}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Package} & \textbf{Online/Offline} & \textbf{State Spaces} & \textbf{Actions Spaces} & \textbf{Observation Spaces}\\
+        \midrule
+        \href{https://github.com/JuliaPOMDP/QMDP.jl}{\texttt{QMDP.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/FIB.jl}{\texttt{FIB.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/BeliefGridValueIteration.jl}{\texttt{BeliefGridValueIteration.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/SARSOP.jl}{\texttt{SARSOP.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/BasicPOMCP.jl}{\texttt{BasicPOMCP.jl}} & Online & Continuous & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/ARDESPOT.jl}{\texttt{ARDESPOT.jl}} & Online & Continuous & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/MCVI.jl}{\texttt{MCVI.jl}} & Offline & Continuous & Discrete & Continuous \\
+        \href{https://github.com/JuliaPOMDP/POMDPSolve.jl}{\texttt{POMDPSolve.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/IncrementalPruning.jl}{\texttt{IncrementalPruning.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/POMCPOW.jl}{\texttt{POMCPOW.jl}} & Online & Continuous & Continuous & Continuous \\
+        \href{https://github.com/JuliaPOMDP/AEMS.jl}{\texttt{AEMS.jl}} & Online & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/PointBasedValueIteration.jl}{\texttt{PointBasedValueIteration.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}
+    }
+\end{table}
+
+{\footnotesize
+\begin{importantblock}
+When defining your problem, the \textbf{\textit{type}} of state, action, and observation space is very important!
+\end{importantblock}
+}
+
+\end{frame}
+
+%-------------------------------------------------

@@ -25,6 +25,11 @@
 \usepackage[flushleft]{threeparttable}
 \usepackage{vector} % local
 \usepackage{varwidth}
+\usepackage{julialogo}
+\usepackage{graphicx}
+\usepackage{graphbox}
+\usepackage{xmpmulti}
+\usepackage{subcaption}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,6 +110,10 @@
 \definecolor{pastelGreen}{HTML}{3EAA0D}
 \definecolor{pastelOrange}{HTML}{C38D09}
 \definecolor{pastelRed}{HTML}{F5615C}
+\definecolor{julia_blue}{HTML}{4063D8}
+\definecolor{julia_green}{HTML}{389826}
+\definecolor{julia_purple}{HTML}{9558B2}
+\definecolor{julia_red}{HTML}{CB3C33}
 
 \begin{jlcode}
     include("../../jl/support_code.jl")
@@ -154,6 +163,7 @@
 % Custom commands
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\smallcaps}[1]{\textsc{#1}}
+\newcommand{\xmark}{$\cdot$}%\ding{53} or \ding{5} for X-mark
 
 \usepackage{mdframed}
 \definecolor{shadecolor}{rgb}{1,0.8,0.3}
@@ -161,10 +171,42 @@
 {\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
 {\end{mdframed}}
 
+\newenvironment{highlightblock}[1][htbp]
+{\begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]}
+{\end{mdframed}}
+
 \newenvironment{definitionblock}[1]{%
     \begin{mdframed}[backgroundcolor=black!5,rightline=false,leftline=false]
         \textbf{Definition: #1.}\;
 }{%
+    \end{mdframed}
+}
+
+\usepackage{environ}
+\usepackage{varwidth}
+
+\newlength{\importantblocktweak}%
+\NewEnviron{importantblock}[1][]{%
+    \setlength{\importantblocktweak}{\dimexpr%
+        +\mdflength{innerleftmargin}
+        +\mdflength{innerrightmargin}
+        +\mdflength{leftmargin}
+        +\mdflength{rightmargin}
+        }%
+    \savebox0{%
+        {\color{julia_red}
+        \begin{varwidth}{\dimexpr\linewidth-\importantblocktweak\relax}%
+            \BODY
+        \end{varwidth}}%
+    }%
+    \begin{mdframed}[
+        backgroundcolor=red!5, 
+        userdefinedwidth=\dimexpr\wd0+\importantblocktweak\relax, 
+        align=center,
+        rightline=false,
+        leftline=false,
+        #1]
+        \usebox0
     \end{mdframed}
 }
 
@@ -177,6 +219,19 @@
   \endjuliaverbatim
   \endvarwidth
   \par
+}
+
+% Define listing blocks so we can scale them.
+\newsavebox{\gridworldcode}
+\newsavebox{\cryingbabycode}
+
+
+% Marker-less footnote: https://tex.stackexchange.com/questions/30720/footnote-without-a-marker
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
 }
 
 

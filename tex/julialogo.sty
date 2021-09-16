@@ -1,0 +1,56 @@
+% Provides a Julia logo in LaTeX
+%
+% LaTeX version of logo implemented by John Wickerson (https://johnwickerson.github.io/):
+% https://tex.stackexchange.com/a/113557
+%
+% Edited by Jeremy Van Cleve (http://vancleve.theoretical.bio)
+% to match official Julia colors and font:
+% https://github.com/JuliaGraphics/julia-logo-graphics
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{julialogo}[2018 v0.1 packaged code by John Wickerson with my edits]
+
+\RequirePackage{fontspec}
+\RequirePackage{tikz}
+\RequirePackage{xspace}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+\newfontfamily\TamilMNvTwelve[
+  Ligatures       = TeX,
+  Scale           = MatchUppercase,
+  Path            = ./tex/fonts/,
+  Extension       = .otf
+  ]{Tamil MN v12d2e1}
+
+\definecolor{mylightred}{rgb}{0.835, 0.388, 0.361}
+\definecolor{mydarkred}{rgb}{0.796, 0.235, 0.2}
+\definecolor{mylightgreen}{rgb}{0.376, 0.678, 0.318}
+\definecolor{mydarkgreen}{rgb}{0.22, 0.596, 0.149}
+\definecolor{mylightpurple}{rgb}{0.667, 0.475, 0.757}
+\definecolor{mydarkpurple}{rgb}{0.584, 0.345, 0.698}
+\definecolor{mylightblue}{rgb}{0.4, 0.51, 0.878}
+\definecolor{mydarkblue}{rgb}{0.251, 0.388, 0.847}
+
+\tikzset{
+  juliadot/.style args={#1,#2}{shape=circle,line width=0.038ex,minimum width=0.38ex,fill=#1,draw=#2}
+}
+
+\newcommand\julialetter[1]{{\strut\bfseries#1}}
+
+\DeclareRobustCommand\julialogo{%
+\begin{tikzpicture}[baseline=0mm, every node/.style={inner sep=0mm, outer sep=0mm}]
+\TamilMNvTwelve
+\node[anchor=base]        (j) at (0,0) {\julialetter{j}};
+\node[anchor=base, right=-0.125ex of j] (u) {\julialetter{u}};
+\node[anchor=base, right=-0.125ex of u] (l) {\julialetter{l}};
+\node[anchor=base, right=-0.125ex of l] (i) {\julialetter{i}};
+\node[anchor=base, right=-0.125ex of i] (a) {\julialetter{a}};
+\path let \p1 = (j) in node[juliadot={mylightblue,mydarkblue}] (bluedot) at (\x1-0.0ex,1.305ex) {};
+\path let \p1 = (i) in node[juliadot={mylightred,mydarkred}] (reddot) at (\x1+0.02ex,1.305ex) {};
+\path let \p1 = (reddot) in node[juliadot={mylightpurple,mydarkpurple}] (purpledot) at (\x1+0.52ex,\y1) {};
+\path let \p1 = (reddot) in node[juliadot={mylightgreen,mydarkgreen}] (greendot) at (\x1+0.26ex,\y1+0.45ex) {};
+\end{tikzpicture}\xspace%
+}
+
+\endinput
