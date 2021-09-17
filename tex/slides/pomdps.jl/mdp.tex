@@ -244,16 +244,13 @@
 using POMDPs, POMDPModelTools, QuickPOMDPs
 
 struct State; x::Int; y::Int end # State definition
-
 @enum Action UP DOWN LEFT RIGHT # Action definition
 
 𝒮 = [[State(x,y) for x=1:10, y=1:10]..., State(-1,-1)] # State-space
 𝒜 = [UP, DOWN, LEFT, RIGHT] # Action-space
-γ = 0.95 # Discount factor
 
-# Helper for applying actions
 const MOVEMENTS = Dict(UP=>State(0,1), DOWN=>State(0,-1), LEFT=>State(-1,0), RIGHT=>State(1,0))
-Base.:+(s1::State, s2::State) = State(s1.x + s2.x, s1.y + s2.y)
+Base.:+(s1::State, s2::State) = State(s1.x + s2.x, s1.y + s2.y) # Helper for applying actions
 
 function T(s, a) # Transition function
     R(s) != 0 && return Deterministic(State(-1,-1))
@@ -292,7 +289,7 @@ mdp = QuickMDP(GridWorld,
     actions    = 𝒜,
     transition = T,
     reward     = R,
-    discount   = γ,
+    discount   = 0.95,
     isterminal = s->s==State(-1,-1));
 \end{lstlisting}
 \end{lrbox}%
@@ -309,7 +306,7 @@ mdp = QuickMDP(GridWorld,
         \begin{itemize}
             \item This code$^a$ defines the entire \textit{Grid World} problem using \texttt{QuickPOMDPs.jl}
             \begin{itemize}
-                \item Just a sneak-peek, as I'll walk through this in more detail in \texttt{Pluto} notebooks
+                \item Just a sneak-peek: we'll walk through this in detail in the \texttt{Pluto} notebooks
             \end{itemize}
         \end{itemize}
         }

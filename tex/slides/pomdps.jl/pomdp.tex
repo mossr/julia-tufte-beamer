@@ -2,9 +2,11 @@
 
 \begin{frame}[fragile]{What is a POMDP?}
 
+{\footnotesize
 \begin{definitionblock}{POMDP}
     A \textit{Partially observable Markov decision process} (POMDP) is an MDP with \textit{state uncertainty}---meaning we cannot know the \textit{true} state, only a \textit{belief} about the true state using \textit{observations}.
 \end{definitionblock}
+}
 
 \phantom{}
 
@@ -35,14 +37,31 @@
 \end{table}
 
 \begin{importantblock}
-    {\footnotesize
+    {\tiny
     \begin{center}
     Remember, a POMDP is a \textit{\textbf{problem formulation}} and \textit{\textbf{not an algorithm}}.
-  
-    A POMDP formulation enables the use of solution methods, i.e. algorithms.
     \end{center}
     }
 \end{importantblock}
+
+\end{frame}
+
+%-------------------------------------------------
+
+\begin{frame}[fragile]{How are POMDPs different than MDPs?}
+
+\begin{itemize}
+    \item A POMDP\footnote{``Partially observable'' is key in understanding beliefs.} is an MDP with \textit{state uncertainty}
+    \begin{align*}
+        \text{MDP: }& \langle \mathcal{S},\, \mathcal{A},\, T,\, R,\, \gamma \rangle\\
+        \text{POMDP: }& \langle \mathcal{S},\, \mathcal{A},\, {\color{darkblue}\mathcal{O}},\, T,\, R,\, {\color{darkblue}O},\, \gamma \rangle
+    \end{align*}
+    \item The agent receives an \textit{observation} of the current state rather than the true state (potentially imperfect observations)
+    \item Using past observations, the agent builds a \textit{belief} of their underlying state
+    \begin{itemize}
+        \item Which can be represented by a probability distribution over true states
+    \end{itemize}
+\end{itemize}
 
 \end{frame}
 
@@ -78,12 +97,13 @@
     \end{column}
     \begin{column}{0.45\columnwidth}
         \begin{itemize}
-            \item A simple POMDP with 2 states, 3 actions, and 2 observations:
+            \item A simple POMDP with 2 states, 2 actions, and 2 observations:
             \begin{align*}
-                \mathcal{S} &= \{\texttt{hungry},\, \texttt{sated}\}\\
-                \mathcal{A} &= \{\texttt{feed},\, \texttt{sing},\, \texttt{ignore}\}\\
+                \mathcal{S} &= \{\texttt{hungry},\, \texttt{full}\}\\
+                \mathcal{A} &= \{\texttt{feed},\, \texttt{ignore}\}\\
                 \mathcal{O} &= \{\texttt{crying},\, \texttt{quiet}\}
             \end{align*}
+            \item We cannot directly tell if the baby is truly \texttt{hungry}, but we can observe that it's \texttt{crying} and update our \textit{belief} about the true state using this information.
         \end{itemize}
     \end{column}
 \end{columns}
@@ -96,7 +116,13 @@
 
 \begin{lrbox}{\cryingbabycode}%
 \begin{lstlisting}[language=JuliaLocal, style=julia]
-crying_pomdp = QuickPOMDP(
+using POMDPs, POMDPModelTools, QuickPOMDPs
+
+@enum State hungry full
+@enum Action feed ignore
+@enum Observation crying quiet
+
+pomdp = QuickPOMDP(
     states       = [hungry, full],  # 𝒮
     actions      = [feed, ignore],  # 𝒜
     observations = [crying, quiet], # 𝒪
@@ -120,14 +146,49 @@ crying_pomdp = QuickPOMDP(
             return SparseCat([crying, quiet], [0.1, 0.9])
         end
     end,
-    
+
     reward = (s,a)->(s == hungry ? -10 : 0) + (a == feed ? -5 : 0)
-) 
+)
 \end{lstlisting}
 \end{lrbox}%
 
-% print the listing box.
-\scalebox{0.3}{\usebox{\cryingbabycode}}
+
+\begin{columns}[onlytextwidth]
+    \begin{column}{0.43\linewidth}
+        % print the listing box.
+        \scalebox{0.28}{\usebox{\cryingbabycode}}
+    \end{column}
+    \begin{column}{0.57\linewidth}
+        {\footnotesize
+        \begin{itemize}
+            \item This code$^a$ defines the entire \textit{Crying Baby} POMDP using \texttt{QuickPOMDPs.jl}
+            \begin{itemize}
+                \item Just a sneak-peek: we'll walk through this in detail in the \texttt{Pluto} notebooks
+            \end{itemize}
+        \end{itemize}
+        }
+        \begin{center}
+            \scalebox{0.7}{%
+            \begin{tikzpicture}
+                \node[minimum size=1cm, draw=black, fill=white, circle] (s) {$s_t$};
+                \node[minimum size=1cm, draw=black, fill=white, circle, right=0.8cm of s] (s2) {$s_{t+1}$};
+                \node[minimum size=1cm, draw=pastelBlue, fill=pastelBlue!40, circle, below=0.5cm of s] (o) {$o_t$};
+                \node[minimum size=1cm, draw=black, fill=white, diamond, above=0.5cm of s] (r) {$r_t$};
+                \node[minimum size=0.8cm, draw=black, fill=white, rectangle, above=0.5cm of r] (a) {$a_t$};
+                \node[left=0.1 of a, anchor=east] {Feed};
+                \node[left=0.1 of r, anchor=east] {Reward};
+                \node[left=0.1 of s, anchor=east] {Hungry};
+                \node[left=0.1 of o, anchor=east] {Crying};
+                \draw[->] (s) -- (o);
+                \draw[->] (s) -- (s2);
+                \draw[->] (s) -- (r);
+                \draw[->] (a) -- (r);
+                \draw[->] (a) -- (s2);
+            \end{tikzpicture}}
+        \end{center}
+        \footnotetext[1]{Yes, this is self-contained---copy and paste it into a notebook or REPL!}
+    \end{column}
+\end{columns}
 
 \end{frame}
 
