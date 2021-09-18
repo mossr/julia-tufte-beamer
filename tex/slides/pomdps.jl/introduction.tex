@@ -36,13 +36,17 @@
         \begin{itemize}
             \item A peek into the \texttt{POMDPs.jl} ecosystem of \textbf{\large{\julialogo}} packages
             \item ``But what \textit{are} POMDPs?''
+            {\footnotesize
             \begin{itemize}
                 \item POMDPs are a \textit{problem formulation} that enable optimal\footnotemark{} sequential decisions to be made in uncertain environments.
-            \end{itemize}
+            \end{itemize}}
             \item Teaching \textit{by example} using interactive \texttt{Pluto.jl} notebooks
+            {\footnotesize
             \begin{itemize}
                 \item No prior knowledge of MDPs/POMDPs necessary---all are welcome!
-            \end{itemize}
+                \item Can also be used as a refresher on \textit{decision making under uncertainty}.
+                \item Target audience is wide, but familiarity with Julia is helpful.
+            \end{itemize}}
         \end{itemize}
         }
     \end{column}
@@ -231,3 +235,31 @@ There are many \textit{excellent} resources on MDPs/POMDPs and reinforcement lea
 \end{frame}
 
 %-------------------------------------------------
+
+\begin{frame}[fragile]{Lecture breakdown}
+
+\begin{highlightblock}
+Each lecture has an associated \texttt{Pluto} notebook detailing the material.
+\end{highlightblock}
+
+\phantom{}
+
+\begin{enumerate}
+    \item \textbf{MDPs: Markov Decision Processes}
+    \begin{itemize}
+        \item Includes: \textit{planning, reinforcement learning, online/offline solvers, simulations}
+    \end{itemize}
+    \item \textbf{POMDPs: Partially Observable Markov Decision Processes}
+    \item \textbf{State Estimation using Particle Filtering}
+    \item \textbf{Approximate Methods for Continuous Spaces}
+    \item \textbf{Deep Reinforcement Learning}
+    \item \textbf{Imitation Learning: Learn from Demonstrations}
+    \item \textbf{Black-Box Validation}
+\end{enumerate}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \node[xshift=-2.0cm, yshift=2cm] (img1) at (current page.south east) {\includegraphics[height=2cm]{images/pomdps_logo.pdf}};
+    % \node[xshift=-2cm, yshift=2cm] (img1) at (current page.south east) {\transduration<0-21>{0}\multiinclude[<+->][format=png, graphics={width=\textwidth}]{images/grid-world-animation/gridworld_value_iteration_γ}};
+\end{tikzpicture}
+
+\end{frame}

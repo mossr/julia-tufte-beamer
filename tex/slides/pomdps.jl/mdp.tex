@@ -1,5 +1,20 @@
 %-------------------------------------------------
 
+\begin{frame}[plain,c]{}
+
+\begin{center}
+\LARGE \textsc{MDPs: Markov Decision Processes}
+\textcolor[RGB]{100,100,100}{\rule{\linewidth}{0.2pt}}
+
+{\color{cardinal}\textbf{\Large{J}\normalsize{ULIA} \Large{A}\normalsize{CADEMY}: \Large{POMDP}\normalsize{S.JL}}}\\
+{\normalsize\textsc{Decision Making Under Uncertainty}}
+
+\end{center}
+
+\end{frame}
+
+%-------------------------------------------------
+
 \begin{frame}[fragile]{What is an MDP?}
 
 \begin{definitionblock}{MDP}
@@ -33,7 +48,7 @@
 \end{table}
 
 \begin{importantblock}
-    {\footnotesize
+    {\tiny
     \begin{center}
     Remember, an MDP is a \textit{\textbf{problem formulation}} and \textit{\textbf{not an algorithm}}.
   
@@ -343,7 +358,7 @@ A number of ways to solve MDPs are implemented in the following packages.
         \href{https://github.com/JuliaPOMDP/DiscreteValueIteration.jl}{\texttt{DiscreteValueIteration.jl}} & Offline & Discrete & Discrete \\
         \href{https://github.com/JuliaPOMDP/LocalApproximationValueIteration.jl}{\texttt{LocalApproximationValueIteration.jl}} & Offline & Continuous & Discrete \\
         \href{https://github.com/JuliaPOMDP/GlobalApproximationValueIteration.jl}{\texttt{GlobalApproximationValueIteration.jl}} & Offline & Continuous & Discrete \\
-        \href{https://github.com/JuliaPOMDP/MCTS.jl}{\texttt{MCTS.jl}}\tnote{*} & Offline & Continuous & Continuous \\
+        \href{https://github.com/JuliaPOMDP/MCTS.jl}{\texttt{MCTS.jl}}\tnote{*} & Online & Continuous & Continuous \\
         \bottomrule
     \end{tabular}
     \begin{tablenotes}
@@ -354,10 +369,11 @@ A number of ways to solve MDPs are implemented in the following packages.
     }
 \end{table}
 
+{\tiny
 \begin{importantblock}
 When defining your problem, the \textbf{\textit{type}} of state and action space is very important!
 \end{importantblock}
-
+}
 
 \end{frame}
 
@@ -390,7 +406,7 @@ When defining your problem, the \textbf{\textit{type}} of state and action space
     }
 \end{table}
 
-{\footnotesize
+{\tiny
 \begin{importantblock}
 When defining your problem, the \textbf{\textit{type}} of state, action, and observation space is very important!
 \end{importantblock}
