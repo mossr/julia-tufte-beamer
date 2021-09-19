@@ -1,7 +1,7 @@
 # Julia Academy Slides
 ## POMDPs.jl — Decision Making Under Uncertainty
 - Refer to main branch for template: https://github.com/mossr/julia-tufte-beamer
-- Working slides: [`main.pdf`](https://github.com/mossr/julia-tufte-beamer/blob/julia-academy/pomdps.jl/main.pdf)
+- Working slides: [`julia-academy-pomdps.pdf`](https://github.com/mossr/julia-tufte-beamer/blob/julia-academy/pomdps.jl/julia-academy-pomdps.pdf)
 
 
 ### Example
