@@ -5,7 +5,7 @@
 % \end{definitionblock}
 
 \begin{itemize}
-    \item \textit{Particle filters} represent the belief state as a collection of states.
+    \item \textit{Particle filters} represent the belief states as a collection of states.
     \item Each state in the approximated belief is called a \textit{particle}.
     \item Useful in problems with large discrete states spaces or continuous problems not well approximated by linear-Gaussian dynamics.
 \end{itemize}
@@ -14,8 +14,8 @@
     \caption{Particle filter algorithm.}
     \label{alg:particle_filter}
     \begin{algorithmic}
-    \Function{ParticleFilter$(\mathbf{b}, T, O, a, o)$}{}
-    \State $\mathbf{s}^\prime \sim T(\mathbf{b}, a)$ \algorithmiccomment{next states}
+    \Function{ParticleFilter$(\mathbf{s}, T, O, a, o)$}{}
+    \State $\mathbf{s}^\prime \sim T(\mathbf{s}, a)$ \algorithmiccomment{next states}
     \State $\mathbf{w} \leftarrow O(o \mid \mathbf{s}^\prime, a)$ \algorithmiccomment{weights}
     \State $\text{particles} \sim \operatorname{SetCategorical}\left(\mathbf{s}^\prime, \frac{\mathbf{w}}{\sum_i w_i}\right)$ \algorithmiccomment{sample with normalized weights}
     \State \Return $\text{particles}$
@@ -23,6 +23,6 @@
     \end{algorithmic}
 \end{algorithm}
 
-See Pluto notebook: \href{http://htmlpreview.github.io/?https://raw.githubusercontent.com/mossr/StateEstimation.jl/master/html/particle_filter.html}{\color{cardinal}StateEstimation.jl/particle\_filter.html}
+See Pluto notebook: \href{http://htmlview.glitch.me/?https://raw.githubusercontent.com/mossr/StateEstimation.jl/master/html/particle_filter.html}{\color{cardinal}StateEstimation.jl/particle\_filter.html}
 
 \end{frame}

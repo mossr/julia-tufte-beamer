@@ -40,6 +40,6 @@ sub pull_julia_code {
 
 pull_julia_code();
 
-$lualatex = "lualatex %O -shell-escape %S";
+$lualatex = "lualatex %O -shell-escape %S && cp output/main.pdf main.pdf";
 
 @default_files = ('main');
