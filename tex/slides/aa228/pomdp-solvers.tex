@@ -1,0 +1,38 @@
+\begin{frame}{POMDP solvers}
+
+A number of ways to solve POMDPs are implemented in the following packages.
+
+\begin{table}[!t]
+    {\tiny
+    \centering
+    \caption{\label{tab:solutions} \texttt{POMDPs.jl} Solution Methods}
+    \rowcolors{2}{white}{gray!15}
+    \begin{threeparttable}
+    \begin{tabular}{lcccc}
+        \toprule
+        \textbf{Package} & \textbf{\textit{Online}/Offline} & \textbf{State Spaces} & \textbf{Actions Spaces} & \textbf{Observation Spaces}\\
+        \midrule
+        \href{https://github.com/JuliaPOMDP/QMDP.jl}{\texttt{QMDP.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/FIB.jl}{\texttt{FIB.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/BeliefGridValueIteration.jl}{\texttt{BeliefGridValueIteration.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/SARSOP.jl}{\texttt{SARSOP.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/BasicPOMCP.jl}{\texttt{BasicPOMCP.jl}} & \textit{Online} & Continuous & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/ARDESPOT.jl}{\texttt{ARDESPOT.jl}} & \textit{Online} & Continuous & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/MCVI.jl}{\texttt{MCVI.jl}} & Offline & Continuous & Discrete & Continuous \\
+        \href{https://github.com/JuliaPOMDP/POMDPSolve.jl}{\texttt{POMDPSolve.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/IncrementalPruning.jl}{\texttt{IncrementalPruning.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/POMCPOW.jl}{\texttt{POMCPOW.jl}} & \textit{Online} & Continuous & Continuous & Continuous \\
+        \href{https://github.com/JuliaPOMDP/AEMS.jl}{\texttt{AEMS.jl}} & \textit{Online} & Discrete & Discrete & Discrete \\
+        \href{https://github.com/JuliaPOMDP/PointBasedValueIteration.jl}{\texttt{PointBasedValueIteration.jl}} & Offline & Discrete & Discrete & Discrete \\
+        \bottomrule
+    \end{tabular}
+    \end{threeparttable}
+    }
+\end{table}
+
+{\footnotesize
+\begin{importantblock}
+When defining your problem, the \textbf{\textit{type}} of state, action, and observation space is very important!
+\end{importantblock}
+}
+\end{frame}
