@@ -342,23 +342,29 @@ mdp = QuickMDP(GridWorld,
 
 \begin{frame}[fragile]{MDP: Policy}
 
+{\scriptsize
 \begin{definitionblock}{Policy $\pi: \mathcal{S} \to \mathcal{A}$}
 
-    A mapping from states $s \in \mathcal{S}$ to actions $a \in \mathcal{A}$. As a function: $a = \pi(s)$
+    A mapping from states $s \in \mathcal{S}$ to actions $a \in \mathcal{A}$.
+    \begin{itemize}
+        \item As a function (deterministic): $a = \pi(s)$
+        \item As a distribution (stochastic): $a \sim \pi(a \mid s)$
+    \end{itemize}
 \end{definitionblock}
+}
 
 \begin{figure}
     \hspace{1cm}
     \centering
     \def\svgwidth{\columnwidth}
-    \scalebox{0.6}{\input{images/grid-world-actions.pdf_tex}}
+    \scalebox{0.5}{\input{images/grid-world-actions.pdf_tex}}
 \end{figure}
 
 \begin{tikzpicture}[remember picture, overlay]
-    \node[xshift=3.0cm, yshift=4.0cm, text width=5cm, align=center] (action-desc) at (current page.south west) {\textbf{Grid World example}:\\The four (discrete) cardinal directions:\\$[\texttt{up}, \texttt{down}, \texttt{left}, \texttt{right}]$};
+    \node[xshift=3.0cm, yshift=2.9cm, text width=5cm, align=center] (action-desc) at (current page.south west) {\textbf{Grid World example}:\\The four (discrete) cardinal directions:\\$[\texttt{up}, \texttt{down}, \texttt{left}, \texttt{right}]$};
 
-    \node[xshift=-5.55cm, yshift=2.7cm, minimum size=0.1cm, inner sep=0pt, outer sep=0pt, draw=black, fill=black, circle] (action-base) at (current page.south east) {};
-    \node[xshift=-2.5cm, yshift=2.3cm, text width=3cm, align=center] (action-label) at (current page.south east) {Take action \texttt{down} in state $(9,4)$. So $\pi\bigl((9,4)\bigr) = \texttt{down}$};
+    \node[xshift=-5.465cm, yshift=2.6cm, minimum size=0.1cm, inner sep=0pt, outer sep=0pt, draw=black, fill=black, circle] (action-base) at (current page.south east) {};
+    \node[xshift=-2.5cm, yshift=2.3cm, text width=3.5cm, align=center] (action-label) at (current page.south east) {Take action \texttt{down} in state $(10,4)$. So $\pi\bigl((10,4)\bigr) = \texttt{down}$};
     \draw[->, dashed] (action-base) -- (action-label);
 \end{tikzpicture}
 
