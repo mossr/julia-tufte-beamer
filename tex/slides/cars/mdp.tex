@@ -6,7 +6,7 @@
 \LARGE \textsc{MDPs: Markov Decision Processes}
 \textcolor[RGB]{100,100,100}{\rule{\linewidth}{0.2pt}}
 
-{\color{cardinal}\textbf{\Large{J}\normalsize{ULIA} \Large{A}\normalsize{CADEMY}: \Large{POMDP}\normalsize{S.JL}}}\\
+{\color{cardinal}\textbf{\Large{CARS} \Large{T}\normalsize{UTORIAL}: \Large{POMDP}\normalsize{S.JL}}}\\
 {\normalsize\textsc{Decision Making Under Uncertainty}}
 
 \end{center}
@@ -188,7 +188,7 @@
 
 \begin{definitionblock}{Reward function\footnotemark[1]{} $R(s,a)$}
 
-    A defines the \textbf{\textit{reward}} an agent receives when taking action $a$ from state $s$.
+    Defines the \textbf{\textit{reward}} an agent receives when taking action $a$ from state $s$.
 \end{definitionblock}
 
 \begin{figure}
@@ -335,6 +335,32 @@ mdp = QuickMDP(GridWorld,
     \end{column}
 \end{columns}
 
+
+\end{frame}
+
+%-------------------------------------------------
+
+\begin{frame}[fragile]{MDP: Policy}
+
+\begin{definitionblock}{Policy $\pi: \mathcal{S} \to \mathcal{A}$}
+
+    A mapping from states $s \in \mathcal{S}$ to actions $a \in \mathcal{A}$. As a function: $a = \pi(s)$
+\end{definitionblock}
+
+\begin{figure}
+    \hspace{1cm}
+    \centering
+    \def\svgwidth{\columnwidth}
+    \scalebox{0.6}{\input{images/grid-world-actions.pdf_tex}}
+\end{figure}
+
+\begin{tikzpicture}[remember picture, overlay]
+    \node[xshift=3.0cm, yshift=4.0cm, text width=5cm, align=center] (action-desc) at (current page.south west) {\textbf{Grid World example}:\\The four (discrete) cardinal directions:\\$[\texttt{up}, \texttt{down}, \texttt{left}, \texttt{right}]$};
+
+    \node[xshift=-5.55cm, yshift=2.7cm, minimum size=0.1cm, inner sep=0pt, outer sep=0pt, draw=black, fill=black, circle] (action-base) at (current page.south east) {};
+    \node[xshift=-2.5cm, yshift=2.3cm, text width=3cm, align=center] (action-label) at (current page.south east) {Take action \texttt{down} in state $(9,4)$. So $\pi\bigl((9,4)\bigr) = \texttt{down}$};
+    \draw[->, dashed] (action-base) -- (action-label);
+\end{tikzpicture}
 
 \end{frame}
 

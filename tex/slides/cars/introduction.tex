@@ -1,4 +1,4 @@
-\begin{frame}[fragile]{What is this course?}
+\begin{frame}[fragile]{What is this tutorial?}
 
 \begin{columns}[T,onlytextwidth]
     \begin{column}{0.35\linewidth}
@@ -6,18 +6,18 @@
             \centering
             \resizebox{!}{0.5\textheight}{%
             \begin{tikzpicture}
-                \node[minimum size=1cm, draw=black, fill=julia_red, circle] (s) {\textcolor{white}{$s_t$}};
-                \node[minimum size=1cm, draw=black, fill=julia_red, circle, right=1cm of s] (s2) {\textcolor{white}{$s_{t+1}$}};
-                \node[minimum size=1cm, draw=black, fill=julia_purple, circle, below=0.25cm of s] (o) {\textcolor{white}{$o_t$}};
-                \node[minimum size=1.3cm, draw=black, fill=julia_green, diamond, above=0.25cm of s] (r) {\textcolor{white}{$r_t$}};
-                \node[minimum size=1cm, draw=black, fill=julia_blue, rectangle, above=0.25cm of r] (a) {\textcolor{white}{$a_t$}};
-                \node[minimum size=1cm, draw=black, fill=julia_blue, rectangle, left=1cm of a] (am1) {\textcolor{white}{$a_{t-1}$}};
-                \node[minimum size=1.3cm, draw=lightgray, fill=julia_green!40, diamond] (rm1) at (am1|-r) {\textcolor{white}{$r_{t-1}$}};
-                \node[minimum size=1cm,   draw=lightgray, fill=julia_red!40, circle]  (sm1) at (am1|-s) {\textcolor{white}{$s_{t-1}$}};
-                \node[minimum size=1cm,   draw=lightgray, fill=julia_purple!40, circle]  (om1) at (am1|-o) {\textcolor{white}{$o_{t-1}$}};
-                \node[minimum size=1cm,   draw=lightgray, fill=julia_blue!40, rectangle] (ap1) at (s2|-a) {\textcolor{white}{$a_{t+1}$}};
-                \node[minimum size=1.3cm, draw=lightgray, fill=julia_green!40, diamond]   (rp1) at (s2|-r) {\textcolor{white}{$r_{t+1}$}};
-                \node[minimum size=1cm,   draw=lightgray, fill=julia_purple!40, circle]    (op1) at (s2|-o) {\textcolor{white}{$o_{t+1}$}};
+                \node[minimum size=1cm, draw=black, fill=white, circle] (s) {$s_t$};
+                \node[minimum size=1cm, draw=black, fill=white, circle, right=1cm of s] (s2) {$s_{t+1}$};
+                \node[minimum size=1cm, draw=pastelBlue, fill=pastelBlue!40, circle, below=0.25cm of s] (o) {$o_t$};
+                \node[minimum size=1.3cm, draw=black, fill=white, diamond, above=0.25cm of s] (r) {$r_t$};
+                \node[minimum size=1cm, draw=black, fill=white, rectangle, above=0.25cm of r] (a) {$a_t$};
+                \node[minimum size=1cm, draw=black, fill=white, rectangle, left=1cm of a] (am1) {$a_{t-1}$};
+                \node[minimum size=1.3cm, draw=lightgray, fill=lightgray!40, diamond] (rm1) at (am1|-r) {\textcolor{gray}{$r_{t-1}$}};
+                \node[minimum size=1cm,   draw=lightgray, fill=lightgray!40, circle]  (sm1) at (am1|-s) {\textcolor{gray}{$s_{t-1}$}};
+                \node[minimum size=1cm,   draw=lightgray, fill=lightgray!40, circle]  (om1) at (am1|-o) {\textcolor{gray}{$o_{t-1}$}};
+                \node[minimum size=1cm,   draw=lightgray, fill=lightgray!40, rectangle] (ap1) at (s2|-a) {\textcolor{gray}{$a_{t+1}$}};
+                \node[minimum size=1.3cm, draw=lightgray, fill=lightgray!40, diamond]   (rp1) at (s2|-r) {\textcolor{gray}{$r_{t+1}$}};
+                \node[minimum size=1cm,   draw=lightgray, fill=lightgray!40, circle]    (op1) at (s2|-o) {\textcolor{gray}{$o_{t+1}$}};
                 \draw[->] (s) -- (o);
                 \draw[->] (s) -- (s2);
                 \draw[->] (s) -- (r);
@@ -78,7 +78,6 @@ All topics highlight packages that adhere to the \texttt{POMDPs.jl} interface.
     \item \textbf{Reinforcement Learning}
     \item \textbf{Deep Reinforcement Learning}
     \item \textbf{Imitation Learning}
-    \item \textbf{Black-Box Validation}
 \end{itemize}
 
 \begin{tikzpicture}[remember picture, overlay]
@@ -254,7 +253,6 @@ Each lecture has an associated \texttt{Pluto} notebook detailing the material.
     \item \textbf{Approximate Methods for Continuous Spaces}
     \item \textbf{Deep Reinforcement Learning}
     \item \textbf{Imitation Learning: Learn from Demonstrations}
-    \item \textbf{Black-Box Validation}
 \end{enumerate}
 
 \begin{tikzpicture}[remember picture, overlay]
