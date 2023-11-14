@@ -1,17 +1,18 @@
 \begin{frame}[fragile]{POMDPs and Beliefs}
 
 \begin{itemize}
-    \item A POMDP\footnote{Partially observable Markov decision process. ``Partially observable'' is key in understanding beliefs.} is an MDP with \textit{state uncertainty}
+    \item A POMDP\footnote{Partially observable Markov decision process. ``Partially observable'' is key in understanding beliefs.} is an MDP with \textit{state uncertainty} \pause
     \begin{align*}
-        \text{MDP: }& \langle \mathcal{S},\, \mathcal{A},\, T,\, R,\, \gamma \rangle\\
+        \text{MDP: }& \langle \mathcal{S},\, \mathcal{A},\, T,\, R,\, \gamma \rangle \\
         \text{POMDP: }& \langle \mathcal{S},\, \mathcal{A},\, {\color{darkblue}\mathcal{O}},\, T,\, R,\, {\color{darkblue}O},\, \gamma \rangle
     \end{align*}
-    \item The agent receives an \textit{observation} of the current state rather than the true state (potentially imperfect observations)
-    \item Using past observations, the agent builds a \textit{belief} of their underlying state
+    \vspace*{-1.5\baselineskip}
+    \pause \item The agent receives an \textit{observation} of the current state rather than the true state (potentially imperfect observations) \pause
+    \item Using past observations, the agent builds a \textit{belief} of their underlying state \pause
     \begin{itemize}
-        \item Which can be represented by a probability distribution over true states
+        \item Which is a probability distribution over true states \pause
     \end{itemize}
-    \item Remember, a POMDP is a \textit{problem formulation} and not an \textit{algorithm}
+    \item Remember, a POMDP is a \textcolor{cardinal}{\textit{problem formulation}} and not an \textcolor{cardinal}{\textit{algorithm}} \pause
     \begin{itemize}
         \item A POMDP formulation enables the use of solution methods, i.e. algorithms.
     \end{itemize}
